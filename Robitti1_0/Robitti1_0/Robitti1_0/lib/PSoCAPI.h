@@ -18,6 +18,7 @@
 #define __PSOCAPI_H
 
 #include "PSoCGPIOINT.h"
+#include "GYRO.h"
 #include "LCD.h"
 #include "OME.h"
 #include "OMT.h"

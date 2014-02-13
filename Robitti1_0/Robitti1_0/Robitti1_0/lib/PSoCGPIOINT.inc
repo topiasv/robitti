@@ -116,6 +116,178 @@ macro ClearOMTPin_Data
 	mov		reg[OMTPin_Data_ADDR], a
 endm
 
+; GYROSCL_Pin address and mask equates
+GYROSCL_Pin_Data_ADDR:	equ	4h
+GYROSCL_Pin_DriveMode_0_ADDR:	equ	104h
+GYROSCL_Pin_DriveMode_1_ADDR:	equ	105h
+GYROSCL_Pin_DriveMode_2_ADDR:	equ	7h
+GYROSCL_Pin_GlobalSelect_ADDR:	equ	6h
+GYROSCL_Pin_IntCtrl_0_ADDR:	equ	106h
+GYROSCL_Pin_IntCtrl_1_ADDR:	equ	107h
+GYROSCL_Pin_IntEn_ADDR:	equ	5h
+GYROSCL_Pin_MASK:	equ	1h
+; GYROSCL_Pin_Data access macros
+;   GetGYROSCL_Pin_Data macro, return in a
+macro GetGYROSCL_Pin_Data
+	mov		a,[Port_1_Data_SHADE]
+	and		a, 1h
+endm
+;   SetGYROSCL_Pin_Data macro
+macro SetGYROSCL_Pin_Data
+	or		[Port_1_Data_SHADE], 1h
+	mov		a, [Port_1_Data_SHADE]
+	mov		reg[GYROSCL_Pin_Data_ADDR], a
+endm
+;   ClearGYROSCL_Pin_Data macro
+macro ClearGYROSCL_Pin_Data
+	and		[Port_1_Data_SHADE], ~1h
+	mov		a, [Port_1_Data_SHADE]
+	mov		reg[GYROSCL_Pin_Data_ADDR], a
+endm
+
+; GYROSCL_Pin_DriveMode_0 access macros
+;   GetGYROSCL_Pin_DriveMode_0 macro, return in a
+macro GetGYROSCL_Pin_DriveMode_0
+	mov		a,[Port_1_DriveMode_0_SHADE]
+	and		a, 1h
+endm
+;   SetGYROSCL_Pin_DriveMode_0 macro
+macro SetGYROSCL_Pin_DriveMode_0
+	or		[Port_1_DriveMode_0_SHADE], 1h
+	mov		a, [Port_1_DriveMode_0_SHADE]
+	mov		reg[GYROSCL_Pin_Data_ADDR], a
+endm
+;   ClearGYROSCL_Pin_DriveMode_0 macro
+macro ClearGYROSCL_Pin_DriveMode_0
+	and		[Port_1_DriveMode_0_SHADE], ~1h
+	mov		a, [Port_1_DriveMode_0_SHADE]
+	mov		reg[GYROSCL_Pin_Data_ADDR], a
+endm
+
+; GYROSCL_Pin_DriveMode_1 access macros
+;   GetGYROSCL_Pin_DriveMode_1 macro, return in a
+macro GetGYROSCL_Pin_DriveMode_1
+	mov		a,[Port_1_DriveMode_1_SHADE]
+	and		a, 1h
+endm
+;   SetGYROSCL_Pin_DriveMode_1 macro
+macro SetGYROSCL_Pin_DriveMode_1
+	or		[Port_1_DriveMode_1_SHADE], 1h
+	mov		a, [Port_1_DriveMode_1_SHADE]
+	mov		reg[GYROSCL_Pin_Data_ADDR], a
+endm
+;   ClearGYROSCL_Pin_DriveMode_1 macro
+macro ClearGYROSCL_Pin_DriveMode_1
+	and		[Port_1_DriveMode_1_SHADE], ~1h
+	mov		a, [Port_1_DriveMode_1_SHADE]
+	mov		reg[GYROSCL_Pin_Data_ADDR], a
+endm
+
+; GYROSCL_Pin_DriveMode_2 access macros
+;   GetGYROSCL_Pin_DriveMode_2 macro, return in a
+macro GetGYROSCL_Pin_DriveMode_2
+	mov		a,[Port_1_DriveMode_2_SHADE]
+	and		a, 1h
+endm
+;   SetGYROSCL_Pin_DriveMode_2 macro
+macro SetGYROSCL_Pin_DriveMode_2
+	or		[Port_1_DriveMode_2_SHADE], 1h
+	mov		a, [Port_1_DriveMode_2_SHADE]
+	mov		reg[GYROSCL_Pin_Data_ADDR], a
+endm
+;   ClearGYROSCL_Pin_DriveMode_2 macro
+macro ClearGYROSCL_Pin_DriveMode_2
+	and		[Port_1_DriveMode_2_SHADE], ~1h
+	mov		a, [Port_1_DriveMode_2_SHADE]
+	mov		reg[GYROSCL_Pin_Data_ADDR], a
+endm
+
+; GYROSDA_Pin address and mask equates
+GYROSDA_Pin_Data_ADDR:	equ	4h
+GYROSDA_Pin_DriveMode_0_ADDR:	equ	104h
+GYROSDA_Pin_DriveMode_1_ADDR:	equ	105h
+GYROSDA_Pin_DriveMode_2_ADDR:	equ	7h
+GYROSDA_Pin_GlobalSelect_ADDR:	equ	6h
+GYROSDA_Pin_IntCtrl_0_ADDR:	equ	106h
+GYROSDA_Pin_IntCtrl_1_ADDR:	equ	107h
+GYROSDA_Pin_IntEn_ADDR:	equ	5h
+GYROSDA_Pin_MASK:	equ	2h
+; GYROSDA_Pin_Data access macros
+;   GetGYROSDA_Pin_Data macro, return in a
+macro GetGYROSDA_Pin_Data
+	mov		a,[Port_1_Data_SHADE]
+	and		a, 2h
+endm
+;   SetGYROSDA_Pin_Data macro
+macro SetGYROSDA_Pin_Data
+	or		[Port_1_Data_SHADE], 2h
+	mov		a, [Port_1_Data_SHADE]
+	mov		reg[GYROSDA_Pin_Data_ADDR], a
+endm
+;   ClearGYROSDA_Pin_Data macro
+macro ClearGYROSDA_Pin_Data
+	and		[Port_1_Data_SHADE], ~2h
+	mov		a, [Port_1_Data_SHADE]
+	mov		reg[GYROSDA_Pin_Data_ADDR], a
+endm
+
+; GYROSDA_Pin_DriveMode_0 access macros
+;   GetGYROSDA_Pin_DriveMode_0 macro, return in a
+macro GetGYROSDA_Pin_DriveMode_0
+	mov		a,[Port_1_DriveMode_0_SHADE]
+	and		a, 2h
+endm
+;   SetGYROSDA_Pin_DriveMode_0 macro
+macro SetGYROSDA_Pin_DriveMode_0
+	or		[Port_1_DriveMode_0_SHADE], 2h
+	mov		a, [Port_1_DriveMode_0_SHADE]
+	mov		reg[GYROSDA_Pin_Data_ADDR], a
+endm
+;   ClearGYROSDA_Pin_DriveMode_0 macro
+macro ClearGYROSDA_Pin_DriveMode_0
+	and		[Port_1_DriveMode_0_SHADE], ~2h
+	mov		a, [Port_1_DriveMode_0_SHADE]
+	mov		reg[GYROSDA_Pin_Data_ADDR], a
+endm
+
+; GYROSDA_Pin_DriveMode_1 access macros
+;   GetGYROSDA_Pin_DriveMode_1 macro, return in a
+macro GetGYROSDA_Pin_DriveMode_1
+	mov		a,[Port_1_DriveMode_1_SHADE]
+	and		a, 2h
+endm
+;   SetGYROSDA_Pin_DriveMode_1 macro
+macro SetGYROSDA_Pin_DriveMode_1
+	or		[Port_1_DriveMode_1_SHADE], 2h
+	mov		a, [Port_1_DriveMode_1_SHADE]
+	mov		reg[GYROSDA_Pin_Data_ADDR], a
+endm
+;   ClearGYROSDA_Pin_DriveMode_1 macro
+macro ClearGYROSDA_Pin_DriveMode_1
+	and		[Port_1_DriveMode_1_SHADE], ~2h
+	mov		a, [Port_1_DriveMode_1_SHADE]
+	mov		reg[GYROSDA_Pin_Data_ADDR], a
+endm
+
+; GYROSDA_Pin_DriveMode_2 access macros
+;   GetGYROSDA_Pin_DriveMode_2 macro, return in a
+macro GetGYROSDA_Pin_DriveMode_2
+	mov		a,[Port_1_DriveMode_2_SHADE]
+	and		a, 2h
+endm
+;   SetGYROSDA_Pin_DriveMode_2 macro
+macro SetGYROSDA_Pin_DriveMode_2
+	or		[Port_1_DriveMode_2_SHADE], 2h
+	mov		a, [Port_1_DriveMode_2_SHADE]
+	mov		reg[GYROSDA_Pin_Data_ADDR], a
+endm
+;   ClearGYROSDA_Pin_DriveMode_2 macro
+macro ClearGYROSDA_Pin_DriveMode_2
+	and		[Port_1_DriveMode_2_SHADE], ~2h
+	mov		a, [Port_1_DriveMode_2_SHADE]
+	mov		reg[GYROSDA_Pin_Data_ADDR], a
+endm
+
 ; LCDD4 address and mask equates
 LCDD4_Data_ADDR:	equ	8h
 LCDD4_DriveMode_0_ADDR:	equ	108h

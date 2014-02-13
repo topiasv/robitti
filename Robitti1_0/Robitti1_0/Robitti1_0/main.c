@@ -17,7 +17,6 @@ void main(void)
    LCD_Position(0,3);            // Place LCD cursor at row 0, col 5.
    LCD_PrString(theStr1);        //Tulosta teksti 1
 
-	/*
 	
 	//Ohjaimien starttaukset..
 	VME_Start();
@@ -92,8 +91,7 @@ void main(void)
 	LCD_Position(1,3);
 	LCD_PrString(theStr4);         //Tulosta teksti 4
 	
-	*/
-	
+
 	
 
 	//ÄLÄ POISTA!!!

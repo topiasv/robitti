@@ -14,6 +14,7 @@
 ; =============================================================================
  
 include "PSoCGPIOINT.inc"
+include "GYRO.inc"
 include "LCD.inc"
 include "OME.inc"
 include "OMT.inc"
