@@ -12,7 +12,7 @@ dbfile lib/vmt.asm
 dbfunc 0 ? 0 I
 dbfile VMT.inc
 dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfile C:/Softat/PSOC_D~1/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
 dbfunc 0 ? 0 I
 dbfile ./lib/VMT.inc
 dbfunc 0 ? 0 I
@@ -93,7 +93,7 @@ dbfile lib/vme.asm
 dbfunc 0 ? 0 I
 dbfile VME.inc
 dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfile C:/Softat/PSOC_D~1/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
 dbfunc 0 ? 0 I
 dbfile ./lib/VME.inc
 dbfunc 0 ? 0 I
@@ -167,7 +167,7 @@ M psocconfigtbl.asm
 A text size 0 flags 0
 dbfile lib/psocconfigtbl.asm
 dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfile C:/Softat/PSOC_D~1/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
 dbfunc 0 ? 0 I
 A lit size 74 flags 0
 S LoadConfigTBL_robitti1_0_Bank0 Def0000
@@ -350,7 +350,7 @@ dbfile memory.inc
 dbfunc 0 ? 0 I
 dbfile lib/psocconfig.asm
 dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfile C:/Softat/PSOC_D~1/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
 dbfunc 0 ? 0 I
 A psoc_config size 7A flags 0
 dbfile lib/psocconfig.asm
@@ -481,7 +481,7 @@ dbfile lib/omt.asm
 dbfunc 0 ? 0 I
 dbfile OMT.inc
 dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfile C:/Softat/PSOC_D~1/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
 dbfunc 0 ? 0 I
 dbfile ./lib/OMT.inc
 dbfunc 0 ? 0 I
@@ -562,7 +562,7 @@ dbfile lib/ome.asm
 dbfunc 0 ? 0 I
 dbfile OME.inc
 dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfile C:/Softat/PSOC_D~1/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
 dbfunc 0 ? 0 I
 dbfile ./lib/OME.inc
 dbfunc 0 ? 0 I
@@ -641,7 +641,7 @@ dbfile lib/lcd.asm
 dbfunc 0 ? 0 I
 dbfile LCD.inc
 dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfile C:/Softat/PSOC_D~1/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
 dbfunc 0 ? 0 I
 dbfile ./lib/LCD.inc
 dbfunc 0 ? 0 I
@@ -651,7 +651,7 @@ dbfile memory.inc
 dbfunc 0 ? 0 I
 dbfile lib/lcd.asm
 dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfile C:/Softat/PSOC_D~1/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
 dbfunc 0 ? 0 I
 A UserModules size 28F flags 0
 dbfile lib/lcd.asm
@@ -1191,7 +1191,7 @@ dbfile memory.inc
 dbfunc 0 ? 0 I
 dbfile lib/gyro.asm
 dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
+dbfile C:/Softat/PSOC_D~1/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C29~1/m8c.inc
 dbfunc 0 ? 0 I
 A robitti1_0_RAM size 4 flags 20
 S GYRO_bData Def0001

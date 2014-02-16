@@ -17,8 +17,9 @@
  003C 566173656D6D616C6C652100  .byte 'V,'a,'s,'e,'m,'m,'a,'l,'l,'e,33,0
                         .area text(rom, con, rel)
  0000                   .dbfile ./main.c
- 0000                   .dbfile C:\Users\Eetu\Dropbox\Opiskelu\Robitti\OHJELM~1\ROBITT~1\ROBITT~1\ROBITT~1\main.c
+ 0000                   .dbfile C:\Users\Markus\DOCUME~1\GitHub\robitti\ROBITT~1\ROBITT~1\ROBITT~1\main.c
  0000                   .dbfunc e main _main fV
+ 0000           ;         status -> X+74
  0000           ;        theStr6 -> X+62
  0000           ;        theStr5 -> X+50
  0000           ;        theStr3 -> X+38
@@ -30,18 +31,20 @@
  0000                   .dbline -1
  0000 10                push X
  0001 4F                mov X,SP
- 0002 384A              add SP,74
+ 0002 384B              add SP,75
  0004                   .dbline 8
  0004           ; #include <m8c.h>        // part specific constants and macros
  0004           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
  0004           ; #include <stdio.h>
  0004           ; 
- 0004           ; 
+ 0004           ; BYTE rxBuf[16];
  0004           ; 
  0004           ; void main(void)
  0004           ; {
- 0004                   .dbline 10
+ 0004                   .dbline 12
  0004           ;       int i;
+ 0004           ;       BYTE status;
+ 0004           ;       
  0004           ;       char theStr1[] = "ROBITTI 1.0";
  0004 62D000            mov REG[0xd0],>__r0
  0007 550000            mov [__r1],<L2
@@ -65,7 +68,7 @@
  002A 3C000C            cmp [__rX],12
  002D BFEF              jnz X1
  002F 20                pop X
- 0030                   .dbline 11
+ 0030                   .dbline 13
  0030           ;       char theStr2[] = "Eteen!     ";
  0030 55000C            mov [__r1],<L3
  0033 55000C            mov [__r0],>L3
@@ -88,7 +91,7 @@
  0053 3C000C            cmp [__rX],12
  0056 BFEF              jnz X2
  0058 20                pop X
- 0059                   .dbline 12
+ 0059                   .dbline 14
  0059           ;       char theStr3[] = "Taakse!    ";
  0059 550018            mov [__r1],<L4
  005C 550018            mov [__r0],>L4
@@ -111,7 +114,7 @@
  007C 3C000C            cmp [__rX],12
  007F BFEF              jnz X3
  0081 20                pop X
- 0082                   .dbline 13
+ 0082                   .dbline 15
  0082           ;       char theStr4[] = "SEIS!      ";
  0082 550024            mov [__r1],<L5
  0085 550024            mov [__r0],>L5
@@ -134,7 +137,7 @@
  00A5 3C000C            cmp [__rX],12
  00A8 BFEF              jnz X4
  00AA 20                pop X
- 00AB                   .dbline 14
+ 00AB                   .dbline 16
  00AB           ;       char theStr5[] = "Oikealle!  ";
  00AB 550030            mov [__r1],<L6
  00AE 550030            mov [__r0],>L6
@@ -157,7 +160,7 @@
  00CE 3C000C            cmp [__rX],12
  00D1 BFEF              jnz X5
  00D3 20                pop X
- 00D4                   .dbline 15
+ 00D4                   .dbline 17
  00D4           ;       char theStr6[] = "Vasemmalle!";
  00D4 55003C            mov [__r1],<L7
  00D7 55003C            mov [__r0],>L7
@@ -179,16 +182,16 @@
  00F5 7600              inc [__rX]
  00F7 3C000C            cmp [__rX],12
  00FA BFEF              jnz X6
- 00FC                   .dbline 16
+ 00FC                   .dbline 18
  00FC           ;    LCD_Start();                  // LCD käynttöönotto
  00FC 7C0000            xcall _LCD_Start
- 00FF                   .dbline 17
+ 00FF                   .dbline 19
  00FF           ;    LCD_Position(0,3);            // Place LCD cursor at row 0, col 5.
  00FF 5703              mov X,3
  0101 5000              mov A,0
  0103 7C0000            xcall _LCD_Position
  0106 20                pop X
- 0107                   .dbline 18
+ 0107                   .dbline 20
  0107           ;    LCD_PrString(theStr1);        //Tulosta teksti 1
  0107 62D000            mov REG[0xd0],>__r0
  010A 5A00              mov [__r1],X
@@ -202,431 +205,462 @@
  0117 7C0000            xcall _LCD_PrString
  011A                   .dbline 22
  011A           ; 
- 011A           ;       
- 011A           ;       //Ohjaimien starttaukset..
- 011A           ;       VME_Start();
- 011A 7C0000            xcall _VME_Start
+ 011A           ;       GYRO_Start();
+ 011A 7C0000            xcall _GYRO_Start
  011D                   .dbline 23
- 011D           ;       OME_Start();
- 011D 7C0000            xcall _OME_Start
- 0120                   .dbline 24
- 0120           ;       VMT_Start();
- 0120 7C0000            xcall _VMT_Start
- 0123                   .dbline 25
- 0123           ;       OMT_Start();
- 0123 7C0000            xcall _OMT_Start
- 0126                   .dbline 28
- 0126           ;       
- 0126           ;       //Eteenpäin
- 0126           ;       VME_Switch(1);         // Turn on VasenMoottoriEteen
- 0126 5001              mov A,1
- 0128 7C0000            xcall _VME_Switch
- 012B                   .dbline 29
- 012B           ;       OME_Switch(1);         // Turn on OikeaMoottoriEteen
- 012B 5001              mov A,1
- 012D 7C0000            xcall _OME_Switch
- 0130                   .dbline 31
- 0130           ;       
- 0130           ;       LCD_Position(1,3);
- 0130 5703              mov X,3
- 0132 5001              mov A,1
- 0134 7C0000            xcall _LCD_Position
- 0137 20                pop X
- 0138                   .dbline 32
- 0138           ;       LCD_PrString(theStr2);         //Tulosta teksti 2
- 0138 62D000            mov REG[0xd0],>__r0
- 013B 5A00              mov [__r1],X
- 013D 06001A            add [__r1],26
- 0140 10                push X
- 0141 5007              mov A,7
- 0143 08                push A
- 0144 5100              mov A,[__r1]
- 0146 5C                mov X,A
- 0147 18                pop A
- 0148 7C0000            xcall _LCD_PrString
- 014B 20                pop X
+ 011D           ;       status = GYRO_fReadBytes(0xD1,rxBuf,15,GYRO_CompleteXfer );
+ 011D 5000              mov A,0
+ 011F 08                push A
+ 0120 500F              mov A,15
+ 0122 08                push A
+ 0123 5000              mov A,>_rxBuf
+ 0125 08                push A
+ 0126 5000              mov A,<_rxBuf
+ 0128 08                push A
+ 0129 50D1              mov A,-47
+ 012B 08                push A
+ 012C 7C0000            xcall _GYRO_fReadBytes
+ 012F 38FB              add SP,-5
+ 0131 20                pop X
+ 0132 62D000            mov REG[0xd0],>__r0
+ 0135 544A              mov [X+74],A
+ 0137                   .dbline 24
+ 0137           ;       GYRO_SendStop();
+ 0137 10                push X
+ 0138 7C0000            xcall _GYRO_SendStop
+ 013B                   .dbline 27
+ 013B           ; 
+ 013B           ;       //Ohjaimien starttaukset..
+ 013B           ;       VME_Start();
+ 013B 7C0000            xcall _VME_Start
+ 013E                   .dbline 28
+ 013E           ;       OME_Start();
+ 013E 7C0000            xcall _OME_Start
+ 0141                   .dbline 29
+ 0141           ;       VMT_Start();
+ 0141 7C0000            xcall _VMT_Start
+ 0144                   .dbline 30
+ 0144           ;       OMT_Start();
+ 0144 7C0000            xcall _OMT_Start
+ 0147                   .dbline 33
+ 0147           ;       
+ 0147           ;       //Eteenpäin
+ 0147           ;       VME_Switch(1);         // Turn on VasenMoottoriEteen
+ 0147 5001              mov A,1
+ 0149 7C0000            xcall _VME_Switch
  014C                   .dbline 34
- 014C           ;       
- 014C           ;       for (i=0;i<30000;i++);
- 014C 560100            mov [X+1],0
- 014F 560000            mov [X+0],0
- 0152           L8:
- 0152                   .dbline 34
- 0152           L9:
- 0152                   .dbline 34
- 0152 7701              inc [X+1]
- 0154 0F0000            adc [X+0],0
- 0157                   .dbline 34
- 0157 5201              mov A,[X+1]
- 0159 1130              sub A,48
- 015B 5200              mov A,[X+0]
- 015D 3180              xor A,-128
- 015F 19F5              sbb A,(117 ^ 0x80)
- 0161 CFF0              jc L8
- 0163           X7:
- 0163                   .dbline 35
- 0163           ;       VME_Switch(0);            // Turn off VasenMoottoriEteen
- 0163 10                push X
- 0164 5000              mov A,0
- 0166 7C0000            xcall _VME_Switch
- 0169                   .dbline 36
- 0169           ;       OME_Switch(0);            // Turn off OikeaMoottoriEteen
- 0169 5000              mov A,0
- 016B 7C0000            xcall _OME_Switch
- 016E 20                pop X
- 016F                   .dbline 38
- 016F           ;       
- 016F           ;       for (i=0;i<30000;i++); //Tauko välissä
- 016F 560100            mov [X+1],0
- 0172 560000            mov [X+0],0
- 0175           L12:
- 0175                   .dbline 38
- 0175           L13:
- 0175                   .dbline 38
- 0175 7701              inc [X+1]
- 0177 0F0000            adc [X+0],0
- 017A                   .dbline 38
- 017A 5201              mov A,[X+1]
- 017C 1130              sub A,48
- 017E 5200              mov A,[X+0]
- 0180 3180              xor A,-128
- 0182 19F5              sbb A,(117 ^ 0x80)
- 0184 CFF0              jc L12
- 0186           X8:
- 0186                   .dbline 39
- 0186           ;       LCD_Position(1,3);
- 0186 10                push X
- 0187 5703              mov X,3
- 0189 5001              mov A,1
- 018B 7C0000            xcall _LCD_Position
- 018E 20                pop X
- 018F                   .dbline 40
- 018F           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
- 018F 62D000            mov REG[0xd0],>__r0
- 0192 5A00              mov [__r1],X
- 0194 060002            add [__r1],2
- 0197 10                push X
- 0198 5007              mov A,7
- 019A 08                push A
- 019B 5100              mov A,[__r1]
- 019D 5C                mov X,A
- 019E 18                pop A
- 019F 7C0000            xcall _LCD_PrString
- 01A2                   .dbline 43
- 01A2           ;       
- 01A2           ;       //Taaksepäin
- 01A2           ;       VMT_Switch(1);         // Turn on VasenMoottoriTaakse
- 01A2 5001              mov A,1
- 01A4 7C0000            xcall _VMT_Switch
+ 014C           ;       OME_Switch(1);         // Turn on OikeaMoottoriEteen
+ 014C 5001              mov A,1
+ 014E 7C0000            xcall _OME_Switch
+ 0151                   .dbline 36
+ 0151           ;       
+ 0151           ;       LCD_Position(1,3);
+ 0151 5703              mov X,3
+ 0153 5001              mov A,1
+ 0155 7C0000            xcall _LCD_Position
+ 0158 20                pop X
+ 0159                   .dbline 37
+ 0159           ;       LCD_PrString(theStr2);         //Tulosta teksti 2
+ 0159 62D000            mov REG[0xd0],>__r0
+ 015C 5A00              mov [__r1],X
+ 015E 06001A            add [__r1],26
+ 0161 10                push X
+ 0162 5007              mov A,7
+ 0164 08                push A
+ 0165 5100              mov A,[__r1]
+ 0167 5C                mov X,A
+ 0168 18                pop A
+ 0169 7C0000            xcall _LCD_PrString
+ 016C 20                pop X
+ 016D                   .dbline 39
+ 016D           ;       
+ 016D           ;       for (i=0;i<30000;i++);
+ 016D 560100            mov [X+1],0
+ 0170 560000            mov [X+0],0
+ 0173           L8:
+ 0173                   .dbline 39
+ 0173           L9:
+ 0173                   .dbline 39
+ 0173 7701              inc [X+1]
+ 0175 0F0000            adc [X+0],0
+ 0178                   .dbline 39
+ 0178 5201              mov A,[X+1]
+ 017A 1130              sub A,48
+ 017C 5200              mov A,[X+0]
+ 017E 3180              xor A,-128
+ 0180 19F5              sbb A,(117 ^ 0x80)
+ 0182 CFF0              jc L8
+ 0184           X7:
+ 0184                   .dbline 40
+ 0184           ;       VME_Switch(0);            // Turn off VasenMoottoriEteen
+ 0184 10                push X
+ 0185 5000              mov A,0
+ 0187 7C0000            xcall _VME_Switch
+ 018A                   .dbline 41
+ 018A           ;       OME_Switch(0);            // Turn off OikeaMoottoriEteen
+ 018A 5000              mov A,0
+ 018C 7C0000            xcall _OME_Switch
+ 018F 20                pop X
+ 0190                   .dbline 43
+ 0190           ;       
+ 0190           ;       for (i=0;i<30000;i++); //Tauko välissä
+ 0190 560100            mov [X+1],0
+ 0193 560000            mov [X+0],0
+ 0196           L12:
+ 0196                   .dbline 43
+ 0196           L13:
+ 0196                   .dbline 43
+ 0196 7701              inc [X+1]
+ 0198 0F0000            adc [X+0],0
+ 019B                   .dbline 43
+ 019B 5201              mov A,[X+1]
+ 019D 1130              sub A,48
+ 019F 5200              mov A,[X+0]
+ 01A1 3180              xor A,-128
+ 01A3 19F5              sbb A,(117 ^ 0x80)
+ 01A5 CFF0              jc L12
+ 01A7           X8:
  01A7                   .dbline 44
- 01A7           ;       OMT_Switch(1);         // Turn on OikeaMoottoriTaakse
- 01A7 5001              mov A,1
- 01A9 7C0000            xcall _OMT_Switch
- 01AC                   .dbline 46
- 01AC           ;       
- 01AC           ;       LCD_Position(1,3);
- 01AC 5703              mov X,3
- 01AE 5001              mov A,1
- 01B0 7C0000            xcall _LCD_Position
- 01B3 20                pop X
- 01B4                   .dbline 47
- 01B4           ;       LCD_PrString(theStr3);         //Tulosta teksti 3
- 01B4 62D000            mov REG[0xd0],>__r0
- 01B7 5A00              mov [__r1],X
- 01B9 060026            add [__r1],38
- 01BC 10                push X
- 01BD 5007              mov A,7
- 01BF 08                push A
- 01C0 5100              mov A,[__r1]
- 01C2 5C                mov X,A
- 01C3 18                pop A
- 01C4 7C0000            xcall _LCD_PrString
- 01C7 20                pop X
+ 01A7           ;       LCD_Position(1,3);
+ 01A7 10                push X
+ 01A8 5703              mov X,3
+ 01AA 5001              mov A,1
+ 01AC 7C0000            xcall _LCD_Position
+ 01AF 20                pop X
+ 01B0                   .dbline 45
+ 01B0           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
+ 01B0 62D000            mov REG[0xd0],>__r0
+ 01B3 5A00              mov [__r1],X
+ 01B5 060002            add [__r1],2
+ 01B8 10                push X
+ 01B9 5007              mov A,7
+ 01BB 08                push A
+ 01BC 5100              mov A,[__r1]
+ 01BE 5C                mov X,A
+ 01BF 18                pop A
+ 01C0 7C0000            xcall _LCD_PrString
+ 01C3                   .dbline 48
+ 01C3           ;       
+ 01C3           ;       //Taaksepäin
+ 01C3           ;       VMT_Switch(1);         // Turn on VasenMoottoriTaakse
+ 01C3 5001              mov A,1
+ 01C5 7C0000            xcall _VMT_Switch
  01C8                   .dbline 49
- 01C8           ;       
- 01C8           ;       for (i=0;i<30000;i++);
- 01C8 560100            mov [X+1],0
- 01CB 560000            mov [X+0],0
- 01CE           L16:
- 01CE                   .dbline 49
- 01CE           L17:
- 01CE                   .dbline 49
- 01CE 7701              inc [X+1]
- 01D0 0F0000            adc [X+0],0
- 01D3                   .dbline 49
- 01D3 5201              mov A,[X+1]
- 01D5 1130              sub A,48
- 01D7 5200              mov A,[X+0]
- 01D9 3180              xor A,-128
- 01DB 19F5              sbb A,(117 ^ 0x80)
- 01DD CFF0              jc L16
- 01DF           X9:
- 01DF                   .dbline 50
- 01DF           ;       VMT_Switch(0);             // Turn off VasenMoottoriTaakse
- 01DF 10                push X
- 01E0 5000              mov A,0
- 01E2 7C0000            xcall _VMT_Switch
- 01E5                   .dbline 51
- 01E5           ;       OMT_Switch(0);             // Turn off OikeaMoottoriTaakse
- 01E5 5000              mov A,0
- 01E7 7C0000            xcall _OMT_Switch
- 01EA                   .dbline 53
- 01EA           ; 
- 01EA           ;       LCD_Position(1,3);
- 01EA 5703              mov X,3
- 01EC 5001              mov A,1
- 01EE 7C0000            xcall _LCD_Position
- 01F1 20                pop X
- 01F2                   .dbline 54
- 01F2           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
- 01F2 62D000            mov REG[0xd0],>__r0
- 01F5 5A00              mov [__r1],X
- 01F7 060002            add [__r1],2
- 01FA 10                push X
- 01FB 5007              mov A,7
- 01FD 08                push A
- 01FE 5100              mov A,[__r1]
- 0200 5C                mov X,A
- 0201 18                pop A
- 0202 7C0000            xcall _LCD_PrString
- 0205 20                pop X
- 0206                   .dbline 58
- 0206           ;       
- 0206           ;       //Käännökset
- 0206           ;               
- 0206           ;       for (i=0;i<30000;i++);
- 0206 560100            mov [X+1],0
- 0209 560000            mov [X+0],0
- 020C           L20:
- 020C                   .dbline 58
- 020C           L21:
- 020C                   .dbline 58
- 020C 7701              inc [X+1]
- 020E 0F0000            adc [X+0],0
- 0211                   .dbline 58
- 0211 5201              mov A,[X+1]
- 0213 1130              sub A,48
- 0215 5200              mov A,[X+0]
- 0217 3180              xor A,-128
- 0219 19F5              sbb A,(117 ^ 0x80)
- 021B CFF0              jc L20
- 021D           X10:
- 021D                   .dbline 60
- 021D           ;       //Oikealle              //Varmuudeksi turn off ei käytettäville suunnille
- 021D           ;       OME_Switch(0);            // Turn off OikeaMoottoriEteen
- 021D 10                push X
- 021E 5000              mov A,0
- 0220 7C0000            xcall _OME_Switch
- 0223                   .dbline 61
- 0223           ;       VMT_Switch(0);             // Turn off VasenMoottoriTaakse
- 0223 5000              mov A,0
- 0225 7C0000            xcall _VMT_Switch
- 0228                   .dbline 62
- 0228           ;       VME_Switch(1);            // Turn on VasenMoottoriEteen
- 0228 5001              mov A,1
- 022A 7C0000            xcall _VME_Switch
+ 01C8           ;       OMT_Switch(1);         // Turn on OikeaMoottoriTaakse
+ 01C8 5001              mov A,1
+ 01CA 7C0000            xcall _OMT_Switch
+ 01CD                   .dbline 51
+ 01CD           ;       
+ 01CD           ;       LCD_Position(1,3);
+ 01CD 5703              mov X,3
+ 01CF 5001              mov A,1
+ 01D1 7C0000            xcall _LCD_Position
+ 01D4 20                pop X
+ 01D5                   .dbline 52
+ 01D5           ;       LCD_PrString(theStr3);         //Tulosta teksti 3
+ 01D5 62D000            mov REG[0xd0],>__r0
+ 01D8 5A00              mov [__r1],X
+ 01DA 060026            add [__r1],38
+ 01DD 10                push X
+ 01DE 5007              mov A,7
+ 01E0 08                push A
+ 01E1 5100              mov A,[__r1]
+ 01E3 5C                mov X,A
+ 01E4 18                pop A
+ 01E5 7C0000            xcall _LCD_PrString
+ 01E8 20                pop X
+ 01E9                   .dbline 54
+ 01E9           ;       
+ 01E9           ;       for (i=0;i<30000;i++);
+ 01E9 560100            mov [X+1],0
+ 01EC 560000            mov [X+0],0
+ 01EF           L16:
+ 01EF                   .dbline 54
+ 01EF           L17:
+ 01EF                   .dbline 54
+ 01EF 7701              inc [X+1]
+ 01F1 0F0000            adc [X+0],0
+ 01F4                   .dbline 54
+ 01F4 5201              mov A,[X+1]
+ 01F6 1130              sub A,48
+ 01F8 5200              mov A,[X+0]
+ 01FA 3180              xor A,-128
+ 01FC 19F5              sbb A,(117 ^ 0x80)
+ 01FE CFF0              jc L16
+ 0200           X9:
+ 0200                   .dbline 55
+ 0200           ;       VMT_Switch(0);             // Turn off VasenMoottoriTaakse
+ 0200 10                push X
+ 0201 5000              mov A,0
+ 0203 7C0000            xcall _VMT_Switch
+ 0206                   .dbline 56
+ 0206           ;       OMT_Switch(0);             // Turn off OikeaMoottoriTaakse
+ 0206 5000              mov A,0
+ 0208 7C0000            xcall _OMT_Switch
+ 020B                   .dbline 58
+ 020B           ; 
+ 020B           ;       LCD_Position(1,3);
+ 020B 5703              mov X,3
+ 020D 5001              mov A,1
+ 020F 7C0000            xcall _LCD_Position
+ 0212 20                pop X
+ 0213                   .dbline 59
+ 0213           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
+ 0213 62D000            mov REG[0xd0],>__r0
+ 0216 5A00              mov [__r1],X
+ 0218 060002            add [__r1],2
+ 021B 10                push X
+ 021C 5007              mov A,7
+ 021E 08                push A
+ 021F 5100              mov A,[__r1]
+ 0221 5C                mov X,A
+ 0222 18                pop A
+ 0223 7C0000            xcall _LCD_PrString
+ 0226 20                pop X
+ 0227                   .dbline 63
+ 0227           ;       
+ 0227           ;       //Käännökset
+ 0227           ;               
+ 0227           ;       for (i=0;i<30000;i++);
+ 0227 560100            mov [X+1],0
+ 022A 560000            mov [X+0],0
+ 022D           L20:
  022D                   .dbline 63
- 022D           ;       OMT_Switch(1);             // Turn on OikeaMoottoriTaakse
- 022D 5001              mov A,1
- 022F 7C0000            xcall _OMT_Switch
- 0232                   .dbline 65
- 0232           ;       
- 0232           ;       LCD_Position(1,3);
- 0232 5703              mov X,3
- 0234 5001              mov A,1
- 0236 7C0000            xcall _LCD_Position
- 0239 20                pop X
- 023A                   .dbline 66
- 023A           ;       LCD_PrString(theStr5);         //Tulosta teksti 5
- 023A 62D000            mov REG[0xd0],>__r0
- 023D 5A00              mov [__r1],X
- 023F 060032            add [__r1],50
- 0242 10                push X
- 0243 5007              mov A,7
- 0245 08                push A
- 0246 5100              mov A,[__r1]
- 0248 5C                mov X,A
- 0249 18                pop A
- 024A 7C0000            xcall _LCD_PrString
- 024D 20                pop X
- 024E                   .dbline 69
- 024E           ;       
- 024E           ;               //Ajastus 90° käännökseen, kokeilemalla...
- 024E           ;       for (i=0;i<30000;i++);
- 024E 560100            mov [X+1],0
- 0251 560000            mov [X+0],0
- 0254           L24:
- 0254                   .dbline 69
- 0254           L25:
- 0254                   .dbline 69
- 0254 7701              inc [X+1]
- 0256 0F0000            adc [X+0],0
- 0259                   .dbline 69
- 0259 5201              mov A,[X+1]
- 025B 1130              sub A,48
- 025D 5200              mov A,[X+0]
- 025F 3180              xor A,-128
- 0261 19F5              sbb A,(117 ^ 0x80)
- 0263 CFF0              jc L24
- 0265           X11:
- 0265                   .dbline 70
- 0265           ;       VME_Switch(0);            // Turn off VasenMoottoriEteen
- 0265 10                push X
- 0266 5000              mov A,0
- 0268 7C0000            xcall _VME_Switch
- 026B                   .dbline 71
- 026B           ;       OMT_Switch(0);             // Turn off OikeaMoottoriTaakse
- 026B 5000              mov A,0
- 026D 7C0000            xcall _OMT_Switch
- 0270                   .dbline 73
- 0270           ;       
- 0270           ;       LCD_Position(1,3);
- 0270 5703              mov X,3
- 0272 5001              mov A,1
- 0274 7C0000            xcall _LCD_Position
- 0277 20                pop X
- 0278                   .dbline 74
- 0278           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
- 0278 62D000            mov REG[0xd0],>__r0
- 027B 5A00              mov [__r1],X
- 027D 060002            add [__r1],2
- 0280 10                push X
- 0281 5007              mov A,7
- 0283 08                push A
- 0284 5100              mov A,[__r1]
- 0286 5C                mov X,A
- 0287 18                pop A
- 0288 7C0000            xcall _LCD_PrString
- 028B 20                pop X
+ 022D           L21:
+ 022D                   .dbline 63
+ 022D 7701              inc [X+1]
+ 022F 0F0000            adc [X+0],0
+ 0232                   .dbline 63
+ 0232 5201              mov A,[X+1]
+ 0234 1130              sub A,48
+ 0236 5200              mov A,[X+0]
+ 0238 3180              xor A,-128
+ 023A 19F5              sbb A,(117 ^ 0x80)
+ 023C CFF0              jc L20
+ 023E           X10:
+ 023E                   .dbline 65
+ 023E           ;       //Oikealle              //Varmuudeksi turn off ei käytettäville suunnille
+ 023E           ;       OME_Switch(0);            // Turn off OikeaMoottoriEteen
+ 023E 10                push X
+ 023F 5000              mov A,0
+ 0241 7C0000            xcall _OME_Switch
+ 0244                   .dbline 66
+ 0244           ;       VMT_Switch(0);             // Turn off VasenMoottoriTaakse
+ 0244 5000              mov A,0
+ 0246 7C0000            xcall _VMT_Switch
+ 0249                   .dbline 67
+ 0249           ;       VME_Switch(1);            // Turn on VasenMoottoriEteen
+ 0249 5001              mov A,1
+ 024B 7C0000            xcall _VME_Switch
+ 024E                   .dbline 68
+ 024E           ;       OMT_Switch(1);             // Turn on OikeaMoottoriTaakse
+ 024E 5001              mov A,1
+ 0250 7C0000            xcall _OMT_Switch
+ 0253                   .dbline 70
+ 0253           ;       
+ 0253           ;       LCD_Position(1,3);
+ 0253 5703              mov X,3
+ 0255 5001              mov A,1
+ 0257 7C0000            xcall _LCD_Position
+ 025A 20                pop X
+ 025B                   .dbline 71
+ 025B           ;       LCD_PrString(theStr5);         //Tulosta teksti 5
+ 025B 62D000            mov REG[0xd0],>__r0
+ 025E 5A00              mov [__r1],X
+ 0260 060032            add [__r1],50
+ 0263 10                push X
+ 0264 5007              mov A,7
+ 0266 08                push A
+ 0267 5100              mov A,[__r1]
+ 0269 5C                mov X,A
+ 026A 18                pop A
+ 026B 7C0000            xcall _LCD_PrString
+ 026E 20                pop X
+ 026F                   .dbline 74
+ 026F           ;       
+ 026F           ;               //Ajastus 90° käännökseen, kokeilemalla...
+ 026F           ;       for (i=0;i<30000;i++);
+ 026F 560100            mov [X+1],0
+ 0272 560000            mov [X+0],0
+ 0275           L24:
+ 0275                   .dbline 74
+ 0275           L25:
+ 0275                   .dbline 74
+ 0275 7701              inc [X+1]
+ 0277 0F0000            adc [X+0],0
+ 027A                   .dbline 74
+ 027A 5201              mov A,[X+1]
+ 027C 1130              sub A,48
+ 027E 5200              mov A,[X+0]
+ 0280 3180              xor A,-128
+ 0282 19F5              sbb A,(117 ^ 0x80)
+ 0284 CFF0              jc L24
+ 0286           X11:
+ 0286                   .dbline 75
+ 0286           ;       VME_Switch(0);            // Turn off VasenMoottoriEteen
+ 0286 10                push X
+ 0287 5000              mov A,0
+ 0289 7C0000            xcall _VME_Switch
  028C                   .dbline 76
- 028C           ;       
- 028C           ;       for (i=0;i<30000;i++);
- 028C 560100            mov [X+1],0
- 028F 560000            mov [X+0],0
- 0292           L28:
- 0292                   .dbline 76
- 0292           L29:
- 0292                   .dbline 76
- 0292 7701              inc [X+1]
- 0294 0F0000            adc [X+0],0
- 0297                   .dbline 76
- 0297 5201              mov A,[X+1]
- 0299 1130              sub A,48
- 029B 5200              mov A,[X+0]
- 029D 3180              xor A,-128
- 029F 19F5              sbb A,(117 ^ 0x80)
- 02A1 CFF0              jc L28
- 02A3           X12:
- 02A3                   .dbline 78
- 02A3           ;       //Vasemmalle    //Varmuudeksi turn off ei käytettäville suunnille
- 02A3           ;       VME_Switch(0);            // Turn off VasenMoottoriEteen
- 02A3 10                push X
- 02A4 5000              mov A,0
- 02A6 7C0000            xcall _VME_Switch
- 02A9                   .dbline 79
- 02A9           ;       OMT_Switch(0);             // Turn off OikeaMoottoriTaakse
- 02A9 5000              mov A,0
- 02AB 7C0000            xcall _OMT_Switch
- 02AE                   .dbline 80
- 02AE           ;       OME_Switch(1);            // Turn on OikeaMoottoriEteen
- 02AE 5001              mov A,1
- 02B0 7C0000            xcall _OME_Switch
+ 028C           ;       OMT_Switch(0);             // Turn off OikeaMoottoriTaakse
+ 028C 5000              mov A,0
+ 028E 7C0000            xcall _OMT_Switch
+ 0291                   .dbline 78
+ 0291           ;       
+ 0291           ;       LCD_Position(1,3);
+ 0291 5703              mov X,3
+ 0293 5001              mov A,1
+ 0295 7C0000            xcall _LCD_Position
+ 0298 20                pop X
+ 0299                   .dbline 79
+ 0299           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
+ 0299 62D000            mov REG[0xd0],>__r0
+ 029C 5A00              mov [__r1],X
+ 029E 060002            add [__r1],2
+ 02A1 10                push X
+ 02A2 5007              mov A,7
+ 02A4 08                push A
+ 02A5 5100              mov A,[__r1]
+ 02A7 5C                mov X,A
+ 02A8 18                pop A
+ 02A9 7C0000            xcall _LCD_PrString
+ 02AC 20                pop X
+ 02AD                   .dbline 81
+ 02AD           ;       
+ 02AD           ;       for (i=0;i<30000;i++);
+ 02AD 560100            mov [X+1],0
+ 02B0 560000            mov [X+0],0
+ 02B3           L28:
  02B3                   .dbline 81
- 02B3           ;       VMT_Switch(1);             // Turn on VasenMoottoriTaakse
- 02B3 5001              mov A,1
- 02B5 7C0000            xcall _VMT_Switch
- 02B8                   .dbline 83
- 02B8           ;       
- 02B8           ;       LCD_Position(1,3);
- 02B8 5703              mov X,3
- 02BA 5001              mov A,1
- 02BC 7C0000            xcall _LCD_Position
- 02BF 20                pop X
- 02C0                   .dbline 84
- 02C0           ;       LCD_PrString(theStr6);         //Tulosta teksti 6
- 02C0 62D000            mov REG[0xd0],>__r0
- 02C3 5A00              mov [__r1],X
- 02C5 06003E            add [__r1],62
- 02C8 10                push X
- 02C9 5007              mov A,7
- 02CB 08                push A
- 02CC 5100              mov A,[__r1]
- 02CE 5C                mov X,A
- 02CF 18                pop A
- 02D0 7C0000            xcall _LCD_PrString
- 02D3 20                pop X
- 02D4                   .dbline 87
- 02D4           ;       
- 02D4           ;               //Ajastus 90° käännökseen, kokeilemalla...
- 02D4           ;       for (i=0;i<30000;i++);
- 02D4 560100            mov [X+1],0
- 02D7 560000            mov [X+0],0
- 02DA           L32:
- 02DA                   .dbline 87
- 02DA           L33:
- 02DA                   .dbline 87
- 02DA 7701              inc [X+1]
- 02DC 0F0000            adc [X+0],0
- 02DF                   .dbline 87
- 02DF 5201              mov A,[X+1]
- 02E1 1130              sub A,48
- 02E3 5200              mov A,[X+0]
- 02E5 3180              xor A,-128
- 02E7 19F5              sbb A,(117 ^ 0x80)
- 02E9 CFF0              jc L32
- 02EB           X13:
- 02EB                   .dbline 88
- 02EB           ;       OME_Switch(0);            // Turn off OikeaMoottoriEteen
- 02EB 10                push X
- 02EC 5000              mov A,0
- 02EE 7C0000            xcall _OME_Switch
- 02F1                   .dbline 89
- 02F1           ;       VMT_Switch(0);             // Turn off VasenMoottoriTaakse
- 02F1 5000              mov A,0
- 02F3 7C0000            xcall _VMT_Switch
- 02F6                   .dbline 91
- 02F6           ;       
- 02F6           ;       LCD_Position(1,3);
- 02F6 5703              mov X,3
- 02F8 5001              mov A,1
- 02FA 7C0000            xcall _LCD_Position
- 02FD 20                pop X
- 02FE                   .dbline 92
- 02FE           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
- 02FE 62D000            mov REG[0xd0],>__r0
- 0301 5A00              mov [__r1],X
- 0303 060002            add [__r1],2
- 0306 10                push X
- 0307 5007              mov A,7
- 0309 08                push A
- 030A 5100              mov A,[__r1]
- 030C 5C                mov X,A
- 030D 18                pop A
- 030E 7C0000            xcall _LCD_PrString
- 0311 20                pop X
- 0312           L36:
- 0312                   .dbline 98
- 0312           ;       
- 0312           ; 
- 0312           ;       
- 0312           ; 
- 0312           ;       //ÄLÄ POISTA!!!
- 0312           ;       while (1);              //ESTÄÄ MAIN:ISTA POISTUMISEN TÄRKEÄ!!! ÄLÄ POISTA!!!
- 0312           L37:
- 0312                   .dbline 98
- 0312 8FFF              xjmp L36
- 0314           X0:
- 0314                   .dbline -2
- 0314           L1:
- 0314 38B6              add SP,-74
- 0316 20                pop X
- 0317                   .dbline 0 ; func end
- 0317 8FFF              jmp .
- 0319                   .dbsym l theStr6 62 A[12:12]c
- 0319                   .dbsym l theStr5 50 A[12:12]c
- 0319                   .dbsym l theStr3 38 A[12:12]c
- 0319                   .dbsym l theStr2 26 A[12:12]c
- 0319                   .dbsym l theStr1 14 A[12:12]c
- 0319                   .dbsym l theStr4 2 A[12:12]c
- 0319                   .dbsym l i 0 I
- 0319                   .dbend
+ 02B3           L29:
+ 02B3                   .dbline 81
+ 02B3 7701              inc [X+1]
+ 02B5 0F0000            adc [X+0],0
+ 02B8                   .dbline 81
+ 02B8 5201              mov A,[X+1]
+ 02BA 1130              sub A,48
+ 02BC 5200              mov A,[X+0]
+ 02BE 3180              xor A,-128
+ 02C0 19F5              sbb A,(117 ^ 0x80)
+ 02C2 CFF0              jc L28
+ 02C4           X12:
+ 02C4                   .dbline 83
+ 02C4           ;       //Vasemmalle    //Varmuudeksi turn off ei käytettäville suunnille
+ 02C4           ;       VME_Switch(0);            // Turn off VasenMoottoriEteen
+ 02C4 10                push X
+ 02C5 5000              mov A,0
+ 02C7 7C0000            xcall _VME_Switch
+ 02CA                   .dbline 84
+ 02CA           ;       OMT_Switch(0);             // Turn off OikeaMoottoriTaakse
+ 02CA 5000              mov A,0
+ 02CC 7C0000            xcall _OMT_Switch
+ 02CF                   .dbline 85
+ 02CF           ;       OME_Switch(1);            // Turn on OikeaMoottoriEteen
+ 02CF 5001              mov A,1
+ 02D1 7C0000            xcall _OME_Switch
+ 02D4                   .dbline 86
+ 02D4           ;       VMT_Switch(1);             // Turn on VasenMoottoriTaakse
+ 02D4 5001              mov A,1
+ 02D6 7C0000            xcall _VMT_Switch
+ 02D9                   .dbline 88
+ 02D9           ;       
+ 02D9           ;       LCD_Position(1,3);
+ 02D9 5703              mov X,3
+ 02DB 5001              mov A,1
+ 02DD 7C0000            xcall _LCD_Position
+ 02E0 20                pop X
+ 02E1                   .dbline 89
+ 02E1           ;       LCD_PrString(theStr6);         //Tulosta teksti 6
+ 02E1 62D000            mov REG[0xd0],>__r0
+ 02E4 5A00              mov [__r1],X
+ 02E6 06003E            add [__r1],62
+ 02E9 10                push X
+ 02EA 5007              mov A,7
+ 02EC 08                push A
+ 02ED 5100              mov A,[__r1]
+ 02EF 5C                mov X,A
+ 02F0 18                pop A
+ 02F1 7C0000            xcall _LCD_PrString
+ 02F4 20                pop X
+ 02F5                   .dbline 92
+ 02F5           ;       
+ 02F5           ;               //Ajastus 90° käännökseen, kokeilemalla...
+ 02F5           ;       for (i=0;i<30000;i++);
+ 02F5 560100            mov [X+1],0
+ 02F8 560000            mov [X+0],0
+ 02FB           L32:
+ 02FB                   .dbline 92
+ 02FB           L33:
+ 02FB                   .dbline 92
+ 02FB 7701              inc [X+1]
+ 02FD 0F0000            adc [X+0],0
+ 0300                   .dbline 92
+ 0300 5201              mov A,[X+1]
+ 0302 1130              sub A,48
+ 0304 5200              mov A,[X+0]
+ 0306 3180              xor A,-128
+ 0308 19F5              sbb A,(117 ^ 0x80)
+ 030A CFF0              jc L32
+ 030C           X13:
+ 030C                   .dbline 93
+ 030C           ;       OME_Switch(0);            // Turn off OikeaMoottoriEteen
+ 030C 10                push X
+ 030D 5000              mov A,0
+ 030F 7C0000            xcall _OME_Switch
+ 0312                   .dbline 94
+ 0312           ;       VMT_Switch(0);             // Turn off VasenMoottoriTaakse
+ 0312 5000              mov A,0
+ 0314 7C0000            xcall _VMT_Switch
+ 0317                   .dbline 96
+ 0317           ;       
+ 0317           ;       LCD_Position(1,3);
+ 0317 5703              mov X,3
+ 0319 5001              mov A,1
+ 031B 7C0000            xcall _LCD_Position
+ 031E 20                pop X
+ 031F                   .dbline 97
+ 031F           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
+ 031F 62D000            mov REG[0xd0],>__r0
+ 0322 5A00              mov [__r1],X
+ 0324 060002            add [__r1],2
+ 0327 10                push X
+ 0328 5007              mov A,7
+ 032A 08                push A
+ 032B 5100              mov A,[__r1]
+ 032D 5C                mov X,A
+ 032E 18                pop A
+ 032F 7C0000            xcall _LCD_PrString
+ 0332 20                pop X
+ 0333           L36:
+ 0333                   .dbline 103
+ 0333           ;       
+ 0333           ; 
+ 0333           ;       
+ 0333           ; 
+ 0333           ;       //ÄLÄ POISTA!!!
+ 0333           ;       while (1);              //ESTÄÄ MAIN:ISTA POISTUMISEN TÄRKEÄ!!! ÄLÄ POISTA!!!
+ 0333           L37:
+ 0333                   .dbline 103
+ 0333 8FFF              xjmp L36
+ 0335           X0:
+ 0335                   .dbline -2
+ 0335           L1:
+ 0335 38B5              add SP,-75
+ 0337 20                pop X
+ 0338                   .dbline 0 ; func end
+ 0338 8FFF              jmp .
+ 033A                   .dbsym l status 74 c
+ 033A                   .dbsym l theStr6 62 A[12:12]c
+ 033A                   .dbsym l theStr5 50 A[12:12]c
+ 033A                   .dbsym l theStr3 38 A[12:12]c
+ 033A                   .dbsym l theStr2 26 A[12:12]c
+ 033A                   .dbsym l theStr1 14 A[12:12]c
+ 033A                   .dbsym l theStr4 2 A[12:12]c
+ 033A                   .dbsym l i 0 I
+ 033A                   .dbend
+                        .area data(ram, con, rel)
+ 0000                   .dbfile C:\Users\Markus\DOCUME~1\GitHub\robitti\ROBITT~1\ROBITT~1\ROBITT~1\main.c
+ 0000           _rxBuf::
+ 0000 00000000000000000000      .word 0,0,0,0,0
+ 000A 000000000000      .byte 0,0,0,0,0,0
+ 0010                   .dbsym e rxBuf _rxBuf A[16:16]c

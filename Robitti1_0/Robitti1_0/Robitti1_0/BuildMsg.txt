@@ -23,16 +23,20 @@ Linking..
 
 LMM info: area 'InterruptRAM' uses 8 bytes in SRAM bank 0
 
+LMM info: area 'data' item of 16 bytes allocated in SRAM page 0
+
 LMM info: area 'virtual_registers' uses 4 bytes in SRAM page 0
+
+LMM info: area 'robitti1_0_RAM' uses 4 bytes in SRAM page 0
 
 idata dump at output/Robitti1_0.idata
 
-  ROM 7% full. 2265 out of 32768 bytes used (does not include absolute areas).
+  ROM 10% full. 3096 out of 32768 bytes used (does not include absolute areas).
 
-  RAM 1% full. 12 bytes used (does not include stack usage).
+  RAM 2% full. 32 bytes used (does not include stack usage).
 
 Built with ICCM8C STD V7.05.00
 
  
-Robitti1_0 - 0 error(s) 0 warning(s) 13:47:21
+Robitti1_0 - 0 error(s) 0 warning(s) 19:16:37
 

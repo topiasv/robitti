@@ -1,6 +1,6 @@
 Project:      output/Robitti1_0
 Build Number: 0
-Date:         Wed Feb 12 13:47:21 2014
+Date:         Sun Feb 16 19:16:37 2014
 Compiler:     ICCM8C
 Version:      7.05.00
 
@@ -39,46 +39,46 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                     UserModules   03DD   0383 =    899. bytes (rel,con,rom,code)
+                     UserModules   03DD   06A1 =   1697. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
        03DD  VMT_On
        03DD  _VMT_On
-       03E1  _VMT_Off
-       03E1  VMT_Start
-       03E1  _VMT_Stop
-       03E1  _VMT_Start
        03E1  VMT_Off
        03E1  VMT_Stop
-       03E3  _VMT_Switch
+       03E1  _VMT_Stop
+       03E1  _VMT_Start
+       03E1  _VMT_Off
+       03E1  VMT_Start
        03E3  VMT_Switch
-       03FB  _VMT_Invert
+       03E3  _VMT_Switch
        03FB  VMT_Invert
-       040A  VMT_GetState
+       03FB  _VMT_Invert
        040A  _VMT_GetState
-       041A  VME_On
+       040A  VMT_GetState
        041A  _VME_On
+       041A  VME_On
        041E  _VME_Stop
-       041E  VME_Start
        041E  VME_Stop
+       041E  VME_Off
+       041E  VME_Start
        041E  _VME_Off
        041E  _VME_Start
-       041E  VME_Off
-       0420  _VME_Switch
        0420  VME_Switch
+       0420  _VME_Switch
        0438  VME_Invert
        0438  _VME_Invert
-       0447  _VME_GetState
        0447  VME_GetState
+       0447  _VME_GetState
        0457  _OMT_On
        0457  OMT_On
-       045B  _OMT_Start
-       045B  OMT_Stop
-       045B  _OMT_Stop
        045B  OMT_Off
+       045B  OMT_Stop
        045B  _OMT_Off
        045B  OMT_Start
+       045B  _OMT_Start
+       045B  _OMT_Stop
        045D  _OMT_Switch
        045D  OMT_Switch
        0475  _OMT_Invert
@@ -87,18 +87,18 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
        0484  OMT_GetState
        0494  _OME_On
        0494  OME_On
-       0498  _OME_Start
        0498  OME_Off
-       0498  _OME_Stop
-       0498  OME_Stop
-       0498  OME_Start
+       0498  _OME_Start
        0498  _OME_Off
-       049A  _OME_Switch
+       0498  OME_Stop
+       0498  _OME_Stop
+       0498  OME_Start
        049A  OME_Switch
+       049A  _OME_Switch
        04B2  OME_Invert
        04B2  _OME_Invert
-       04C1  _OME_GetState
        04C1  OME_GetState
+       04C1  _OME_GetState
        04D1  LCD_PrCString
        04D1  _LCD_PrCString
        04E3  LCD_HEX_STR
@@ -106,21 +106,21 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
        04F3  _LCD_PrHexByte
        0506  LCD_PrHexInt
        0506  _LCD_PrHexInt
-       050D  _LCD_PrString
        050D  LCD_PrString
+       050D  _LCD_PrString
        051F  _LCD_Write_Data
        051F  LCD_Write_Data
        051F  LCD_WriteData
        051F  _LCD_WriteData
        0533  _LCD_Control
        0533  LCD_Control
+       05E3  _LCD_Start
+       05E3  LCD_Init
        05E3  LCD_Start
        05E3  _LCD_Init
-       05E3  LCD_Init
-       05E3  _LCD_Start
        0652  LCD_ROW_OFFSET
-       0656  LCD_Position
        0656  _LCD_Position
+       0656  LCD_Position
        0666  _LCD_Delay50uTimes
        0666  LCD_Delay50uTimes
        066C  LCD_Delay50u_Table
@@ -128,25 +128,42 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
        0674  LCD_Delay50u
        0688  _LCD_DrawBG
        06B9  _LCD_DrawVBG
-       06ED  LCD_InitVBG
        06ED  _LCD_InitVBG
+       06ED  LCD_InitVBG
        071E  LCD_BG_TYPE1
        0725  LCD_BG_TYPE2
        072C  LCD_InitBG
        072C  _LCD_InitBG
-       0760  __UserModules_end
+       0760  _GYRO_Start
+       0760  GYRO_Start
+       0784  _GYRO_Stop
+       0784  GYRO_Stop
+       0785  _GYRO_fReadBytes
+       07EA  _GYRO_bWriteBytes
+       0846  _GYRO_bWriteCBytes
+       0896  GYRO_fSendRepeatStart
+       0896  _GYRO_fSendRepeatStart
+       08CC  _GYRO_fSendStart
+       08CC  GYRO_fSendStart
+       0906  GYRO_fWrite
+       0906  _GYRO_fWrite
+       099D  _GYRO_bRead
+       099D  GYRO_bRead
+       0A48  GYRO_SendStop
+       0A48  _GYRO_SendStop
+       0A7E  __UserModules_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0760   0319 =    793. bytes (rel,con,rom,code)
+                            text   0A7E   033A =    826. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0760  __text_start
-       0760  _main
-       0A79  __xidata_start
-       0A79  __text_end
-       0A7B  __xidata_end
+       0A7E  __text_start
+       0A7E  _main
+       0DB8  __xidata_start
+       0DB8  __text_end
+       0DBE  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -185,28 +202,50 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-               virtual_registers   0008   0004 =      4. bytes (rel,con,ram)
+                  robitti1_0_RAM   001C   0004 =      4. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0008  __rX
-       0009  __r3
-       000A  __r1
-       000B  __r0
+       001C  _GYRO_bStatus
+       001C  GYRO_bStatus
+       001D  _GYRO_bData
+       001D  GYRO_bData
+       001E  _GYRO_bAddr
+       001E  GYRO_bAddr
+
+Area                               Addr   Size   Decimal Bytes (Attributes)
+--------------------------------   ----   ----   ------- ----- ------------
+               virtual_registers   0018   0004 =      4. bytes (rel,con,ram)
+
+       Addr  Global Symbol
+      -----  --------------------------------
+       0018  __rX
+       0019  __r3
+       001A  __r1
+       001B  __r0
+
+Area                               Addr   Size   Decimal Bytes (Attributes)
+--------------------------------   ----   ----   ------- ----- ------------
+                            data   0000   0010 =     16. bytes (rel,con,ram)
+
+       Addr  Global Symbol
+      -----  --------------------------------
+       0000  __data_start
+       0008  _rxBuf
 
 Files Linked      [ module(s) ]
 
 ./obj/boot.o	[ boot.asm ]
 obj/main.o	[ main.c ]
-<library>	[ vmt.asm, vme.asm, psocconfigtbl.asm, psocconfig.asm, omt.asm, ome.asm, lcd.asm, rX.asm, r3.asm, r1.asm ]
-[ r0.asm ]
+<library>	[ vmt.asm, vme.asm, psocconfigtbl.asm, psocconfig.asm, omt.asm, ome.asm, lcd.asm, gyro.asm, rX.asm ]
+[ r3.asm, r1.asm, r0.asm ]
 
 Area Definitions
 
 -blit:0x1a0.0x7fff
 -bdata:0.0x6ff
 -BInterruptRAM:0	allocated at: 0
--Bvirtual_registers	allocated at: 0x8
--Brobitti1_0_RAM
+-Bvirtual_registers	allocated at: 0x18
+-Brobitti1_0_RAM	allocated at: 0x1c
 -rwh:SSCParmBlk:0xf7.0xff
 

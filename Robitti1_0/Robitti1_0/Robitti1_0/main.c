@@ -2,11 +2,13 @@
 #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
 #include <stdio.h>
 
-
+BYTE rxBuf[16];
 
 void main(void)
 {
 	int i;
+	BYTE status;
+	
 	char theStr1[] = "ROBITTI 1.0";
 	char theStr2[] = "Eteen!     ";
 	char theStr3[] = "Taakse!    ";
@@ -17,7 +19,10 @@ void main(void)
    LCD_Position(0,3);            // Place LCD cursor at row 0, col 5.
    LCD_PrString(theStr1);        //Tulosta teksti 1
 
-	
+	GYRO_Start();
+	status = GYRO_fReadBytes(0xD1,rxBuf,15,GYRO_CompleteXfer );
+	GYRO_SendStop();
+
 	//Ohjaimien starttaukset..
 	VME_Start();
 	OME_Start();
