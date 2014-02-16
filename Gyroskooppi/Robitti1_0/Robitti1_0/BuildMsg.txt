@@ -1,0 +1,56 @@
+Starting MAKE...
+creating project.mk 
+
+lib/gyro.asm
+
+lib/lcd.asm
+
+lib/ome.asm
+
+lib/omt.asm
+
+lib/psocconfig.asm
+
+lib/psocconfigtbl.asm
+
+lib/vme.asm
+
+lib/vmt.asm
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\ROBITT~1\ROBITT~1\main.c(11):[warning] [MISRA 2200]calling an undeclared function may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\ROBITT~1\ROBITT~1\main.c(11):[warning] [MISRA 2714]calling a function without prototype may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\ROBITT~1\ROBITT~1\main.c(13):[warning] [MISRA 2200]calling an undeclared function may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\ROBITT~1\ROBITT~1\main.c(13):[warning] [MISRA 2714]calling a function without prototype may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!E C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\ROBITT~1\ROBITT~1\main.c(13): undeclared identifier `rxBuf'
+
+!E C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\ROBITT~1\ROBITT~1\main.c(13): undeclared identifier `I2Cm_RepStart'
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\ROBITT~1\ROBITT~1\main.c(15):[warning] [MISRA 2200]calling an undeclared function may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\ROBITT~1\ROBITT~1\main.c(15):[warning] [MISRA 2714]calling a function without prototype may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!E C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\ROBITT~1\ROBITT~1\main.c(18): type error: pointer expected
+
+!E C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\ROBITT~1\ROBITT~1\main.c(18): type error in argument 1 to `LCD_PrString'; found `unsigned char' expected `pointer to char'
+
+make: *** [obj/main.o] Error 1
+
+ 
+Robitti1_0 - 5 error(s) 6 warning(s) 17:40:15
+
