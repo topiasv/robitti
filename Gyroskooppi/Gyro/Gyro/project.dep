@@ -1,0 +1,39 @@
+# DO NOT DELETE
+./obj/boot.o : \
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8ssc.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\lib\GLOBAL~1.INC\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\memory.inc
+./obj/main.o :  ./lib/GYRO.h ./lib/LCD.h ./lib/OME.h ./lib/OMT.h\
+   ./lib/PSoCAPI.h ./lib/PSOCGP~1.H ./lib/TRIGG.h ./lib/VME.h\
+   ./lib/VMT.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/stdarg.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/stdio.h
+./lib/obj/gyro.o :  ./lib/GYRO.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\memory.inc
+./lib/obj/lcd.o :  ./lib/LCD.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\memory.inc
+./lib/obj/ome.o :  ./lib/OME.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\memory.inc
+./lib/obj/omt.o :  ./lib/OMT.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\memory.inc
+./lib/obj/psocconfig.o :  ./lib/GLOBAL~1.INC\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\memory.inc
+./lib/obj/psocconfigtbl.o : \
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+./lib/obj/trigg.o :  ./lib/TRIGG.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\memory.inc
+./lib/obj/vme.o :  ./lib/VME.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\memory.inc
+./lib/obj/vmt.o :  ./lib/VMT.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\memory.inc

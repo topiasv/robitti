@@ -1,0 +1,345 @@
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+                        .area lit(rom, con, rel, lit)
+ 0000           L2:
+ 0000 4779726F736B6F6F70706900  .byte 'G,'y,'r,'o,'s,'k,'o,'o,'p,'p,'i,0
+ 000C           L3:
+ 000C 457465656E21202020202000  .byte 'E,'t,'e,'e,'n,33,32,32,32,32,32,0
+ 0018           L4:
+ 0018 5461616B7365212020202000  .byte 'T,'a,'a,'k,'s,'e,33,32,32,32,32,0
+ 0024           L5:
+ 0024 534549532120202020202000  .byte 'S,'E,'I,'S,33,32,32,32,32,32,32,0
+ 0030           L6:
+ 0030 4F696B65616C6C6521202000  .byte 'O,'i,'k,'e,'a,'l,'l,'e,33,32,32,0
+ 003C           L7:
+ 003C 566173656D6D616C6C652100  .byte 'V,'a,'s,'e,'m,'m,'a,'l,'l,'e,33,0
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000                   .dbfile C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\Gyro\Gyro\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           ;        theStr6 -> X+77
+ 0000           ;        theStr5 -> X+65
+ 0000           ;        theStr4 -> X+53
+ 0000           ;        theStr3 -> X+41
+ 0000           ;        theStr2 -> X+29
+ 0000           ;          rxBuf -> X+13
+ 0000           ;         status -> X+12
+ 0000           ;        theStr1 -> X+0
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000 10                push X
+ 0001 4F                mov X,SP
+ 0002 3859              add SP,89
+ 0004                   .dbline 34
+ 0004           ; //----------------------------------------------------------------------------
+ 0004           ; // C main line
+ 0004           ; //----------------------------------------------------------------------------
+ 0004           ; 
+ 0004           ; #include <m8c.h>        // part specific constants and macros
+ 0004           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0004           ; #include <stdio.h>
+ 0004           ; 
+ 0004           ; 
+ 0004           ; /* TESTI
+ 0004           ;       void echo (void)
+ 0004           ; {
+ 0004           ; Counter16_Stop;
+ 0004           ; timervalue=Counter16_wReadCounter();
+ 0004           ; timervalue=0xffff-timervalue;
+ 0004           ; time=timervalue*10.66;
+ 0004           ; distance=(time/54.6)-1;
+ 0004           ; Counter16_WritePeriod(0xffff);
+ 0004           ; Counter16_Start;
+ 0004           ; }
+ 0004           ; */
+ 0004           ; /*
+ 0004           ;       void trigger (void)
+ 0004           ; {
+ 0004           ;       // TRIGGERIN YKSI PULSSI
+ 0004           ;       TRIGG_Start();
+ 0004           ;       TRIGG_Switch(1);
+ 0004           ;         for (i=0;i<4;i++); //n. 10us
+ 0004           ;       TRIGG_Switch(0);
+ 0004           ; }*/
+ 0004           ; 
+ 0004           ; 
+ 0004           ; void main(void)
+ 0004           ; {
+ 0004                   .dbline 39
+ 0004           ;       BYTE status;
+ 0004           ;       BYTE rxBuf[16];
+ 0004           ;       
+ 0004           ;       //int i, j;
+ 0004           ;       char theStr1[] = "Gyroskooppi";
+ 0004 550000            mov [__r1],<L2
+ 0007 550000            mov [__r0],>L2
+ 000A 5A00              mov [__r3],X
+ 000C 10                push X
+ 000D 550000            mov [__rX],0
+ 0010 5100              mov A,[__r0]
+ 0012 5800              mov X,[__r1]
+ 0014           X1:
+ 0014 08                push A
+ 0015 28                romx
+ 0016 3F00              mvi [__r3],A
+ 0018 18                pop A
+ 0019 75                inc X
+ 001A 0900              adc A,0
+ 001C 7600              inc [__rX]
+ 001E 3C000C            cmp [__rX],12
+ 0021 BFF2              jnz X1
+ 0023 20                pop X
+ 0024                   .dbline 40
+ 0024           ;       char theStr2[] = "Eteen!     ";
+ 0024 55000C            mov [__r1],<L3
+ 0027 55000C            mov [__r0],>L3
+ 002A 5A00              mov [__r3],X
+ 002C 06001D            add [__r3],29
+ 002F 10                push X
+ 0030 550000            mov [__rX],0
+ 0033 5100              mov A,[__r0]
+ 0035 5800              mov X,[__r1]
+ 0037           X2:
+ 0037 08                push A
+ 0038 28                romx
+ 0039 3F00              mvi [__r3],A
+ 003B 18                pop A
+ 003C 75                inc X
+ 003D 0900              adc A,0
+ 003F 7600              inc [__rX]
+ 0041 3C000C            cmp [__rX],12
+ 0044 BFF2              jnz X2
+ 0046 20                pop X
+ 0047                   .dbline 41
+ 0047           ;       char theStr3[] = "Taakse!    ";
+ 0047 550018            mov [__r1],<L4
+ 004A 550018            mov [__r0],>L4
+ 004D 5A00              mov [__r3],X
+ 004F 060029            add [__r3],41
+ 0052 10                push X
+ 0053 550000            mov [__rX],0
+ 0056 5100              mov A,[__r0]
+ 0058 5800              mov X,[__r1]
+ 005A           X3:
+ 005A 08                push A
+ 005B 28                romx
+ 005C 3F00              mvi [__r3],A
+ 005E 18                pop A
+ 005F 75                inc X
+ 0060 0900              adc A,0
+ 0062 7600              inc [__rX]
+ 0064 3C000C            cmp [__rX],12
+ 0067 BFF2              jnz X3
+ 0069 20                pop X
+ 006A                   .dbline 42
+ 006A           ;       char theStr4[] = "SEIS!      ";
+ 006A 550024            mov [__r1],<L5
+ 006D 550024            mov [__r0],>L5
+ 0070 5A00              mov [__r3],X
+ 0072 060035            add [__r3],53
+ 0075 10                push X
+ 0076 550000            mov [__rX],0
+ 0079 5100              mov A,[__r0]
+ 007B 5800              mov X,[__r1]
+ 007D           X4:
+ 007D 08                push A
+ 007E 28                romx
+ 007F 3F00              mvi [__r3],A
+ 0081 18                pop A
+ 0082 75                inc X
+ 0083 0900              adc A,0
+ 0085 7600              inc [__rX]
+ 0087 3C000C            cmp [__rX],12
+ 008A BFF2              jnz X4
+ 008C 20                pop X
+ 008D                   .dbline 43
+ 008D           ;       char theStr5[] = "Oikealle!  ";
+ 008D 550030            mov [__r1],<L6
+ 0090 550030            mov [__r0],>L6
+ 0093 5A00              mov [__r3],X
+ 0095 060041            add [__r3],65
+ 0098 10                push X
+ 0099 550000            mov [__rX],0
+ 009C 5100              mov A,[__r0]
+ 009E 5800              mov X,[__r1]
+ 00A0           X5:
+ 00A0 08                push A
+ 00A1 28                romx
+ 00A2 3F00              mvi [__r3],A
+ 00A4 18                pop A
+ 00A5 75                inc X
+ 00A6 0900              adc A,0
+ 00A8 7600              inc [__rX]
+ 00AA 3C000C            cmp [__rX],12
+ 00AD BFF2              jnz X5
+ 00AF 20                pop X
+ 00B0                   .dbline 44
+ 00B0           ;       char theStr6[] = "Vasemmalle!";
+ 00B0 55003C            mov [__r1],<L7
+ 00B3 55003C            mov [__r0],>L7
+ 00B6 5A00              mov [__r3],X
+ 00B8 06004D            add [__r3],77
+ 00BB 10                push X
+ 00BC 550000            mov [__rX],0
+ 00BF 5100              mov A,[__r0]
+ 00C1 5800              mov X,[__r1]
+ 00C3           X6:
+ 00C3 08                push A
+ 00C4 28                romx
+ 00C5 3F00              mvi [__r3],A
+ 00C7 18                pop A
+ 00C8 75                inc X
+ 00C9 0900              adc A,0
+ 00CB 7600              inc [__rX]
+ 00CD 3C000C            cmp [__rX],12
+ 00D0 BFF2              jnz X6
+ 00D2                   .dbline 45
+ 00D2           ;    LCD_Start();                  // LCD käynttöönotto
+ 00D2 7C0000            xcall _LCD_Start
+ 00D5                   .dbline 46
+ 00D5           ;    LCD_Position(0,3);            // Place LCD cursor at row 0, col 5.
+ 00D5 5703              mov X,3
+ 00D7 5000              mov A,0
+ 00D9 7C0000            xcall _LCD_Position
+ 00DC 20                pop X
+ 00DD                   .dbline 47
+ 00DD           ;    LCD_PrString(theStr1);        //Tulosta teksti 1
+ 00DD 10                push X
+ 00DE 5100              mov A,[__r0]
+ 00E0 7C0000            xcall _LCD_PrString
+ 00E3                   .dbline 49
+ 00E3           ;       
+ 00E3           ;       GYRO_Start();
+ 00E3 7C0000            xcall _GYRO_Start
+ 00E6 20                pop X
+ 00E7                   .dbline 50
+ 00E7           ;       status = GYRO_fReadBytes(0xD1,rxBuf,15,GYRO_CompleteXfer );
+ 00E7 10                push X
+ 00E8 5000              mov A,0
+ 00EA 08                push A
+ 00EB 500F              mov A,15
+ 00ED 08                push A
+ 00EE 5A00              mov [__r1],X
+ 00F0 06000D            add [__r1],13
+ 00F3 5100              mov A,[__r0]
+ 00F5 08                push A
+ 00F6 5100              mov A,[__r1]
+ 00F8 08                push A
+ 00F9 50D1              mov A,-47
+ 00FB 08                push A
+ 00FC 7C0000            xcall _GYRO_fReadBytes
+ 00FF 38FB              add SP,-5
+ 0101 20                pop X
+ 0102 540C              mov [X+12],A
+ 0104                   .dbline 51
+ 0104           ;       GYRO_SendStop();
+ 0104 10                push X
+ 0105 7C0000            xcall _GYRO_SendStop
+ 0108 20                pop X
+ 0109           L8:
+ 0109                   .dbline 136
+ 0109           ; 
+ 0109           ;       /*
+ 0109           ;       
+ 0109           ;       //Ohjaimien starttaukset..
+ 0109           ;       VME_Start();
+ 0109           ;       OME_Start();
+ 0109           ;       VMT_Start();
+ 0109           ;       OMT_Start();
+ 0109           ;       
+ 0109           ;       //Eteenpäin
+ 0109           ;       VME_Switch(1);         // Turn on VasenMoottoriEteen
+ 0109           ;       OME_Switch(1);         // Turn on OikeaMoottoriEteen
+ 0109           ;       
+ 0109           ;       LCD_Position(1,3);
+ 0109           ;       LCD_PrString(theStr2);         //Tulosta teksti 2
+ 0109           ;       
+ 0109           ;       for (i=0;i<30000;i++);
+ 0109           ;       VME_Switch(0);            // Turn off VasenMoottoriEteen
+ 0109           ;       OME_Switch(0);            // Turn off OikeaMoottoriEteen
+ 0109           ;       
+ 0109           ;       for (i=0;i<30000;i++); //Tauko välissä
+ 0109           ;       LCD_Position(1,3);
+ 0109           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
+ 0109           ;       
+ 0109           ;       //Taaksepäin
+ 0109           ;       VMT_Switch(1);         // Turn on VasenMoottoriTaakse
+ 0109           ;       OMT_Switch(1);         // Turn on OikeaMoottoriTaakse
+ 0109           ;       
+ 0109           ;       LCD_Position(1,3);
+ 0109           ;       LCD_PrString(theStr3);         //Tulosta teksti 3
+ 0109           ;       
+ 0109           ;       for (i=0;i<30000;i++);
+ 0109           ;       VMT_Switch(0);             // Turn off VasenMoottoriTaakse
+ 0109           ;       OMT_Switch(0);             // Turn off OikeaMoottoriTaakse
+ 0109           ; 
+ 0109           ;       LCD_Position(1,3);
+ 0109           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
+ 0109           ;       
+ 0109           ;       //Käännökset
+ 0109           ;               
+ 0109           ;       for (i=0;i<30000;i++);
+ 0109           ;       //Oikealle              //Varmuudeksi turn off ei käytettäville suunnille
+ 0109           ;       OME_Switch(0);            // Turn off OikeaMoottoriEteen
+ 0109           ;       VMT_Switch(0);             // Turn off VasenMoottoriTaakse
+ 0109           ;       VME_Switch(1);            // Turn on VasenMoottoriEteen
+ 0109           ;       OMT_Switch(1);             // Turn on OikeaMoottoriTaakse
+ 0109           ;       
+ 0109           ;       LCD_Position(1,3);
+ 0109           ;       LCD_PrString(theStr5);         //Tulosta teksti 5
+ 0109           ;       
+ 0109           ;               //Ajastus 90° käännökseen, kokeilemalla...
+ 0109           ;       for (i=0;i<30000;i++);
+ 0109           ;       VME_Switch(0);            // Turn off VasenMoottoriEteen
+ 0109           ;       OMT_Switch(0);             // Turn off OikeaMoottoriTaakse
+ 0109           ;       
+ 0109           ;       LCD_Position(1,3);
+ 0109           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
+ 0109           ;       
+ 0109           ;       for (i=0;i<30000;i++);
+ 0109           ;       //Vasemmalle    //Varmuudeksi turn off ei käytettäville suunnille
+ 0109           ;       VME_Switch(0);            // Turn off VasenMoottoriEteen
+ 0109           ;       OMT_Switch(0);             // Turn off OikeaMoottoriTaakse
+ 0109           ;       OME_Switch(1);            // Turn on OikeaMoottoriEteen
+ 0109           ;       VMT_Switch(1);             // Turn on VasenMoottoriTaakse
+ 0109           ;       
+ 0109           ;       LCD_Position(1,3);
+ 0109           ;       LCD_PrString(theStr6);         //Tulosta teksti 6
+ 0109           ;       
+ 0109           ;               //Ajastus 90° käännökseen, kokeilemalla...
+ 0109           ;       for (i=0;i<30000;i++);
+ 0109           ;       OME_Switch(0);            // Turn off OikeaMoottoriEteen
+ 0109           ;       VMT_Switch(0);             // Turn off VasenMoottoriTaakse
+ 0109           ;       
+ 0109           ;       LCD_Position(1,3);
+ 0109           ;       LCD_PrString(theStr4);         //Tulosta teksti 4
+ 0109           ;       
+ 0109           ;       */
+ 0109           ;       
+ 0109           ; 
+ 0109           ;       
+ 0109           ; 
+ 0109           ; 
+ 0109           ; 
+ 0109           ;       //ÄLÄ POISTA!!!
+ 0109           ;       while (1);              //ESTÄÄ MAIN:ISTA POISTUMISEN TÄRKEÄ!!! ÄLÄ POISTA!!!
+ 0109           L9:
+ 0109                   .dbline 136
+ 0109 8FFF              xjmp L8
+ 010B           X0:
+ 010B                   .dbline -2
+ 010B           L1:
+ 010B 38A7              add SP,-89
+ 010D 20                pop X
+ 010E                   .dbline 0 ; func end
+ 010E 8FFF              jmp .
+ 0110                   .dbsym l theStr6 77 A[12:12]c
+ 0110                   .dbsym l theStr5 65 A[12:12]c
+ 0110                   .dbsym l theStr4 53 A[12:12]c
+ 0110                   .dbsym l theStr3 41 A[12:12]c
+ 0110                   .dbsym l theStr2 29 A[12:12]c
+ 0110                   .dbsym l rxBuf 13 A[16:16]c
+ 0110                   .dbsym l status 12 c
+ 0110                   .dbsym l theStr1 0 A[12:12]c
+ 0110                   .dbend
