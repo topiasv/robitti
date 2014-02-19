@@ -1,107 +1,108 @@
 Project:      output/Gyro
 Build Number: 0
-Date:         Sun Feb 16 20:33:29 2014
+Date:         Wed Feb 19 18:22:00 2014
 Compiler:     ICCM8C
 Version:      7.05.00
 
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                             lit   0150   0096 =    150. bytes (rel,con,rom,lit)
+                             lit   0150   00C5 =    197. bytes (rel,con,rom,lit)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0198  LoadConfigTBL_testi_Bank0
-       01C3  LoadConfigTBL_testi_Bank1
-       01E6  __lit_end
+       01C7  LoadConfigTBL_testi_Bank0
+       01F2  LoadConfigTBL_testi_Bank1
+       0215  __lit_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                     psoc_config   01E6   013B =    315. bytes (rel,con,rom,code)
+                     psoc_config   0215   013B =    315. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
-       01E6  LoadConfigTBL_testi_Ordered
-       02AB  _LoadConfigInit
-       02AB  LoadConfigInit
-       02CA  _LoadConfig_testi
-       02CA  LoadConfig_testi
-       0321  __psoc_config_end
+       0215  LoadConfigTBL_testi_Ordered
+       02DA  _LoadConfigInit
+       02DA  LoadConfigInit
+       02F9  _LoadConfig_testi
+       02F9  LoadConfig_testi
+       0350  __psoc_config_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                     UserModules   0321   0600 =   1536. bytes (rel,con,rom,code)
+                     UserModules   0350   0600 =   1536. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0321  LCD_PrCString
-       0321  _LCD_PrCString
-       0333  LCD_HEX_STR
-       0343  LCD_PrHexByte
-       0343  _LCD_PrHexByte
-       0356  _LCD_PrHexInt
-       0356  LCD_PrHexInt
-       035D  _LCD_PrString
-       035D  LCD_PrString
-       0367  LCD_WriteData
-       0367  _LCD_Write_Data
-       0367  _LCD_WriteData
-       0367  LCD_Write_Data
-       037B  _LCD_Control
-       037B  LCD_Control
-       0422  _LCD_Init
-       0422  LCD_Init
-       0422  LCD_Start
-       0422  _LCD_Start
-       048E  LCD_ROW_OFFSET
-       0492  _LCD_Position
-       0492  LCD_Position
-       049E  _LCD_Delay50uTimes
-       049E  LCD_Delay50uTimes
-       04A4  LCD_Delay50u_Table
-       04AC  LCD_Delay50u
-       04AC  _LCD_Delay50u
-       04C0  LCD_DrawBG
-       04E6  _LCD_DrawBG
-       050F  LCD_DrawVBG
-       053C  _LCD_DrawVBG
-       056C  _LCD_InitVBG
-       056C  LCD_InitVBG
-       0599  LCD_BG_TYPE1
-       05A0  LCD_BG_TYPE2
-       05A7  _LCD_InitBG
-       05A7  LCD_InitBG
-       05D7  _GYRO_Start
-       05D7  GYRO_Start
-       05F8  GYRO_Stop
-       05F8  _GYRO_Stop
-       05F9  _GYRO_fReadBytes
-       0642  GYRO_fReadBytes
-       0686  _GYRO_bWriteBytes
-       06C3  GYRO_bWriteBytes
-       06FB  _GYRO_bWriteCBytes
-       073B  GYRO_bWriteCBytes
-       0778  _GYRO_fSendRepeatStart
-       0778  GYRO_fSendRepeatStart
-       07AB  _GYRO_fSendStart
-       07AB  GYRO_fSendStart
-       07DC  GYRO_fWrite
-       07DC  _GYRO_fWrite
-       085B  GYRO_bRead
-       085B  _GYRO_bRead
-       08EE  _GYRO_SendStop
-       08EE  GYRO_SendStop
-       0921  __UserModules_end
+       0350  LCD_PrCString
+       0350  _LCD_PrCString
+       0362  LCD_HEX_STR
+       0372  LCD_PrHexByte
+       0372  _LCD_PrHexByte
+       0385  _LCD_PrHexInt
+       0385  LCD_PrHexInt
+       038C  _LCD_PrString
+       038C  LCD_PrString
+       0396  LCD_WriteData
+       0396  _LCD_Write_Data
+       0396  _LCD_WriteData
+       0396  LCD_Write_Data
+       03AA  _LCD_Control
+       03AA  LCD_Control
+       0451  _LCD_Init
+       0451  LCD_Init
+       0451  LCD_Start
+       0451  _LCD_Start
+       04BD  LCD_ROW_OFFSET
+       04C1  _LCD_Position
+       04C1  LCD_Position
+       04CD  _LCD_Delay50uTimes
+       04CD  LCD_Delay50uTimes
+       04D3  LCD_Delay50u_Table
+       04DB  LCD_Delay50u
+       04DB  _LCD_Delay50u
+       04EF  LCD_DrawBG
+       0515  _LCD_DrawBG
+       053E  LCD_DrawVBG
+       056B  _LCD_DrawVBG
+       059B  _LCD_InitVBG
+       059B  LCD_InitVBG
+       05C8  LCD_BG_TYPE1
+       05CF  LCD_BG_TYPE2
+       05D6  _LCD_InitBG
+       05D6  LCD_InitBG
+       0606  _GYRO_Start
+       0606  GYRO_Start
+       0627  GYRO_Stop
+       0627  _GYRO_Stop
+       0628  _GYRO_fReadBytes
+       0671  GYRO_fReadBytes
+       06B5  _GYRO_bWriteBytes
+       06F2  GYRO_bWriteBytes
+       072A  _GYRO_bWriteCBytes
+       076A  GYRO_bWriteCBytes
+       07A7  _GYRO_fSendRepeatStart
+       07A7  GYRO_fSendRepeatStart
+       07DA  _GYRO_fSendStart
+       07DA  GYRO_fSendStart
+       080B  _GYRO_fWrite
+       080B  GYRO_fWrite
+       088A  GYRO_bRead
+       088A  _GYRO_bRead
+       091D  _GYRO_SendStop
+       091D  GYRO_SendStop
+       0950  __UserModules_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0921   0110 =    272. bytes (rel,con,rom,code)
+                            text   0950   0269 =    617. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0921  __text_start
-       0921  _main
-       0A31  __text_end
+       0950  _readSlave
+       0950  __text_start
+       0A9E  _main
+       0BB9  __text_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------

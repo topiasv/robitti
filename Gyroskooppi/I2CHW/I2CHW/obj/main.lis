@@ -1,0 +1,549 @@
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000                   .dbfile C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c
+ 0000                   .dbfunc e SleepTimerInterrupt _SleepTimerInterrupt fV
+ 0000           ;              i -> X+2
+ 0000           ;            ptr -> X+0
+ 0000           _SleepTimerInterrupt::
+ 0000                   .dbline -1
+ 0000 10                push X
+ 0001 4F                mov X,SP
+ 0002 3803              add SP,3
+ 0004                   .dbline 21
+ 0004           ; //----------------------------------------------------------------------------
+ 0004           ; // TCN75(A) I2C reading example
+ 0004           ; // 2013-11-01 Paavo Leinonen <paavo.leinonen@iki.fi>
+ 0004           ; //----------------------------------------------------------------------------
+ 0004           ; 
+ 0004           ; //
+ 0004           ; // Helpful documents:
+ 0004           ; //
+ 0004           ; // http://www.cypress.com/?docID=45173
+ 0004           ; // http://ww1.microchip.com/downloads/en/DeviceDoc/21935D.pdf
+ 0004           ; //
+ 0004           ; 
+ 0004           ; #include <stdlib.h>
+ 0004           ; #include <string.h>
+ 0004           ; #include <m8c.h>
+ 0004           ; #include "PSoCAPI.h"
+ 0004           ; 
+ 0004           ; volatile BYTE downcounters[1];
+ 0004           ; 
+ 0004           ; void SleepTimerInterrupt(void)
+ 0004           ; {
+ 0004                   .dbline 22
+ 0004           ;       BYTE i=sizeof(downcounters);
+ 0004 560201            mov [X+2],1
+ 0007                   .dbline 23
+ 0007           ;       volatile BYTE *ptr=downcounters;
+ 0007 560100            mov [X+1],<_downcounters
+ 000A 560000            mov [X+0],>_downcounters
+ 000D 8020              xjmp L3
+ 000F           L2:
+ 000F                   .dbline 26
+ 000F           ; 
+ 000F           ;       while (i--)
+ 000F           ;       {
+ 000F                   .dbline 27
+ 000F           ;               if (*ptr)
+ 000F 5201              mov A,[X+1]
+ 0011 5300              mov [__r1],A
+ 0013 3E00              mvi A,[__r1]
+ 0015 A013              jz L5
+ 0017                   .dbline 29
+ 0017           ;               {
+ 0017           ;                       *ptr=*ptr-1;    // *ptr-- generates compiler warning
+ 0017                   .dbline 29
+ 0017 5201              mov A,[X+1]
+ 0019 5300              mov [__r1],A
+ 001B 3E00              mvi A,[__r1]
+ 001D 1101              sub A,1
+ 001F 5300              mov [__r0],A
+ 0021 5201              mov A,[X+1]
+ 0023 5300              mov [__r3],A
+ 0025 5100              mov A,[__r0]
+ 0027 3F00              mvi [__r3],A
+ 0029                   .dbline 30
+ 0029           ;               }
+ 0029           L5:
+ 0029                   .dbline 31
+ 0029           ;               ptr++;
+ 0029 7701              inc [X+1]
+ 002B 0F0000            adc [X+0],0
+ 002E                   .dbline 32
+ 002E           ;       }
+ 002E           L3:
+ 002E                   .dbline 25
+ 002E 5202              mov A,[X+2]
+ 0030 5300              mov [__r1],A
+ 0032 550000            mov [__r0],0
+ 0035 1101              sub A,1
+ 0037 5402              mov [X+2],A
+ 0039 3C0000            cmp [__r0],0
+ 003C BFD2              jnz L2
+ 003E 3C0000            cmp [__r1],0
+ 0041 BFCD              jnz L2
+ 0043           X0:
+ 0043                   .dbline -2
+ 0043           L1:
+ 0043 38FD              add SP,-3
+ 0045 20                pop X
+ 0046                   .dbline 0 ; func end
+ 0046 7F                ret
+ 0047                   .dbsym l i 2 c
+ 0047                   .dbsym l ptr 0 pc
+ 0047                   .dbend
+ 0047                   .dbfunc e tcn75_read _tcn75_read fI
+ 0047                   .dbunion 1 2 .8
+ 0047                   .dbfield 0 buf A[2:2]c
+ 0047                   .dbfield 0 value I
+ 0047                   .dbend
+ 0047           ;              d -> X+0
+ 0047           ;        subaddr -> X-4
+ 0047           _tcn75_read::
+ 0047                   .dbline -1
+ 0047 10                push X
+ 0048 4F                mov X,SP
+ 0049 3802              add SP,2
+ 004B                   .dbline 48
+ 004B           ; }
+ 004B           ; 
+ 004B           ; #define TCN75_TO_FLOAT(x) (((float)(x))/256.)
+ 004B           ; 
+ 004B           ; #define TCN75_REG_TA  0x0
+ 004B           ; #define TCN75_REG_CONFIG      0x1
+ 004B           ; #define TCN75_REG_THYST       0x2
+ 004B           ; #define TCN75_REG_TSET        0x3
+ 004B           ; 
+ 004B           ; #define TCN75_9BIT    (0<<5)
+ 004B           ; #define TCN75_10BIT   (1<<5)
+ 004B           ; #define TCN75_11BIT   (2<<5)
+ 004B           ; #define TCN75_12BIT   (3<<5)
+ 004B           ; 
+ 004B           ; int tcn75_read(BYTE subaddr)
+ 004B           ; {
+ 004B                   .dbline 54
+ 004B           ;       union {
+ 004B           ;               BYTE buf[2];
+ 004B           ;               int value;
+ 004B           ;       } d;
+ 004B           ; 
+ 004B           ;       subaddr=0x48|(subaddr&0x07); // convert to 7 bit I2C address
+ 004B 52FC              mov A,[X-4]
+ 004D 2107              and A,7
+ 004F 2948              or A,72
+ 0051 54FC              mov [X-4],A
+ 0053                   .dbline 57
+ 0053           ;       
+ 0053           ;       // start the module
+ 0053           ;       I2CHW_Start();
+ 0053 10                push X
+ 0054 7C0000            xcall _I2CHW_Start
+ 0057                   .dbline 58
+ 0057           ;       I2CHW_EnableMstr(); 
+ 0057 7C0000            xcall _I2CHW_EnableMstr
+ 005A                   .dbline 59
+ 005A           ;       I2CHW_EnableInt(); 
+ 005A 7C0000            xcall _I2CHW_EnableInt
+ 005D 20                pop X
+ 005E                   .dbline 62
+ 005E           ; 
+ 005E           ;       // configure
+ 005E           ;       d.buf[0]=TCN75_REG_CONFIG;
+ 005E 560001            mov [X+0],1
+ 0061                   .dbline 63
+ 0061           ;       d.buf[1]=TCN75_12BIT;
+ 0061 560160            mov [X+1],96
+ 0064                   .dbline 64
+ 0064           ;       I2CHW_bWriteBytes(subaddr, d.buf, 2, I2CHW_CompleteXfer);
+ 0064 10                push X
+ 0065 5000              mov A,0
+ 0067 08                push A
+ 0068 5002              mov A,2
+ 006A 08                push A
+ 006B 5100              mov A,[__r0]
+ 006D 08                push A
+ 006E 10                push X
+ 006F 52FC              mov A,[X-4]
+ 0071 08                push A
+ 0072 7C0000            xcall _I2CHW_bWriteBytes
+ 0075 38FB              add SP,-5
+ 0077 20                pop X
+ 0078           L10:
+ 0078                   .dbline 65
+ 0078           ;       while(!(I2CHW_bReadI2CStatus() & I2CHW_WR_COMPLETE));
+ 0078           L11:
+ 0078                   .dbline 65
+ 0078 7C0000            xcall _I2CHW_bReadI2CStatus
+ 007B 260040            and [__r1],64
+ 007E 260000            and [__r0],0
+ 0081 B006              jnz X1
+ 0083 3C0000            cmp [__r1],0
+ 0086 AFF1              jz L10
+ 0088           X1:
+ 0088                   .dbline 66
+ 0088           ;       I2CHW_ClrWrStatus();
+ 0088 7C0000            xcall _I2CHW_ClrWrStatus
+ 008B                   .dbline 69
+ 008B           ;       
+ 008B           ;       // select TA
+ 008B           ;       d.buf[0]=TCN75_REG_TA;
+ 008B 560000            mov [X+0],0
+ 008E                   .dbline 70
+ 008E           ;       I2CHW_bWriteBytes(subaddr, d.buf, 1, I2CHW_CompleteXfer);
+ 008E 10                push X
+ 008F 5000              mov A,0
+ 0091 08                push A
+ 0092 5001              mov A,1
+ 0094 08                push A
+ 0095 5100              mov A,[__r0]
+ 0097 08                push A
+ 0098 10                push X
+ 0099 52FC              mov A,[X-4]
+ 009B 08                push A
+ 009C 7C0000            xcall _I2CHW_bWriteBytes
+ 009F 38FB              add SP,-5
+ 00A1 20                pop X
+ 00A2           L13:
+ 00A2                   .dbline 71
+ 00A2           ;       while(!(I2CHW_bReadI2CStatus() & I2CHW_WR_COMPLETE));
+ 00A2           L14:
+ 00A2                   .dbline 71
+ 00A2 7C0000            xcall _I2CHW_bReadI2CStatus
+ 00A5 260040            and [__r1],64
+ 00A8 260000            and [__r0],0
+ 00AB B006              jnz X2
+ 00AD 3C0000            cmp [__r1],0
+ 00B0 AFF1              jz L13
+ 00B2           X2:
+ 00B2                   .dbline 72
+ 00B2           ;       I2CHW_ClrWrStatus();
+ 00B2 7C0000            xcall _I2CHW_ClrWrStatus
+ 00B5                   .dbline 75
+ 00B5           ;       
+ 00B5           ;       // read register
+ 00B5           ;       I2CHW_fReadBytes(subaddr, d.buf, 2, I2CHW_CompleteXfer); 
+ 00B5 10                push X
+ 00B6 5000              mov A,0
+ 00B8 08                push A
+ 00B9 5002              mov A,2
+ 00BB 08                push A
+ 00BC 5100              mov A,[__r0]
+ 00BE 08                push A
+ 00BF 10                push X
+ 00C0 52FC              mov A,[X-4]
+ 00C2 08                push A
+ 00C3 7C0000            xcall _I2CHW_fReadBytes
+ 00C6 38FB              add SP,-5
+ 00C8 20                pop X
+ 00C9           L16:
+ 00C9                   .dbline 76
+ 00C9           ;       while(!(I2CHW_bReadI2CStatus() & I2CHW_RD_COMPLETE)); 
+ 00C9           L17:
+ 00C9                   .dbline 76
+ 00C9 7C0000            xcall _I2CHW_bReadI2CStatus
+ 00CC 260004            and [__r1],4
+ 00CF 260000            and [__r0],0
+ 00D2 B006              jnz X3
+ 00D4 3C0000            cmp [__r1],0
+ 00D7 AFF1              jz L16
+ 00D9           X3:
+ 00D9                   .dbline 77
+ 00D9           ;       I2CHW_ClrRdStatus();
+ 00D9 7C0000            xcall _I2CHW_ClrRdStatus
+ 00DC                   .dbline 80
+ 00DC           ;       
+ 00DC           ;       // shutdown the module
+ 00DC           ;       I2CHW_DisableInt();
+ 00DC 10                push X
+ 00DD 7C0000            xcall _I2CHW_DisableInt
+ 00E0                   .dbline 81
+ 00E0           ;       I2CHW_DisableMstr();
+ 00E0 7C0000            xcall _I2CHW_DisableMstr
+ 00E3                   .dbline 82
+ 00E3           ;       I2CHW_Stop();
+ 00E3 7C0000            xcall _I2CHW_Stop
+ 00E6 20                pop X
+ 00E7                   .dbline 84
+ 00E7           ;       
+ 00E7           ;       return d.value;
+ 00E7 5201              mov A,[X+1]
+ 00E9 5300              mov [__r1],A
+ 00EB 5200              mov A,[X+0]
+ 00ED 5300              mov [__r0],A
+ 00EF                   .dbline -2
+ 00EF           L7:
+ 00EF 38FE              add SP,-2
+ 00F1 20                pop X
+ 00F2                   .dbline 0 ; func end
+ 00F2 7F                ret
+ 00F3                   .dbsym l d 0 S[.8]
+ 00F3                   .dbsym l subaddr -4 c
+ 00F3                   .dbend
+ 00F3                   .dbfunc e format_temperature _format_temperature fV
+ 00F3           ;           fbuf -> X+2
+ 00F3           ;         status -> X+0
+ 00F3           ;          value -> X-7
+ 00F3           ;            buf -> X-5
+ 00F3           _format_temperature::
+ 00F3                   .dbline -1
+ 00F3 10                push X
+ 00F4 4F                mov X,SP
+ 00F5 3804              add SP,4
+ 00F7                   .dbline 89
+ 00F7           ; }
+ 00F7           ; 
+ 00F7           ; 
+ 00F7           ; void format_temperature(char *buf, int value)
+ 00F7           ; {
+ 00F7                   .dbline 93
+ 00F7           ;       int status;
+ 00F7           ;       char *fbuf;
+ 00F7           ;       
+ 00F7           ;       fbuf=ftoa(TCN75_TO_FLOAT(value),&status);
+ 00F7 5100              mov A,[__r0]
+ 00F9 08                push A
+ 00FA 10                push X
+ 00FB 52FA              mov A,[X-6]
+ 00FD 5300              mov [__r3],A
+ 00FF 52F9              mov A,[X-7]
+ 0101 5300              mov [__r2],A
+ 0103 470080            tst [__r2],-128
+ 0106 A009              jz X4
+ 0108 5500FF            mov [__r1],-1
+ 010B 5500FF            mov [__r0],-1
+ 010E 8007              jmp X5
+ 0110           X4:
+ 0110 550000            mov [__r1],0
+ 0113 550000            mov [__r0],0
+ 0116           X5:
+ 0116 5100              mov A,[__r0]
+ 0118 08                push A
+ 0119 5100              mov A,[__r1]
+ 011B 08                push A
+ 011C 5100              mov A,[__r2]
+ 011E 08                push A
+ 011F 5100              mov A,[__r3]
+ 0121 08                push A
+ 0122 7C0000            xcall __long2fp
+ 0125 18                pop A
+ 0126 5300              mov [__r3],A
+ 0128 18                pop A
+ 0129 5300              mov [__r2],A
+ 012B 18                pop A
+ 012C 5300              mov [__r1],A
+ 012E 18                pop A
+ 012F 5300              mov [__r0],A
+ 0131 5043              mov A,67
+ 0133 08                push A
+ 0134 5080              mov A,-128
+ 0136 08                push A
+ 0137 5000              mov A,0
+ 0139 08                push A
+ 013A 08                push A
+ 013B 5100              mov A,[__r0]
+ 013D 08                push A
+ 013E 5100              mov A,[__r1]
+ 0140 08                push A
+ 0141 5100              mov A,[__r2]
+ 0143 08                push A
+ 0144 5100              mov A,[__r3]
+ 0146 08                push A
+ 0147 7C0000            xcall __fpdiv
+ 014A 18                pop A
+ 014B 5300              mov [__r3],A
+ 014D 18                pop A
+ 014E 5300              mov [__r2],A
+ 0150 18                pop A
+ 0151 5300              mov [__r1],A
+ 0153 18                pop A
+ 0154 38FC              add SP,-4
+ 0156 08                push A
+ 0157 5100              mov A,[__r1]
+ 0159 08                push A
+ 015A 5100              mov A,[__r2]
+ 015C 08                push A
+ 015D 5100              mov A,[__r3]
+ 015F 08                push A
+ 0160 7C0000            xcall _ftoa
+ 0163 38FA              add SP,-6
+ 0165 5100              mov A,[__r1]
+ 0167 5403              mov [X+3],A
+ 0169 5100              mov A,[__r0]
+ 016B 5402              mov [X+2],A
+ 016D                   .dbline 94
+ 016D           ;       if (status)
+ 016D 3D0000            cmp [X+0],0
+ 0170 B006              jnz X6
+ 0172 3D0100            cmp [X+1],0
+ 0175 A014              jz L20
+ 0177           X6:
+ 0177                   .dbline 96
+ 0177           ;       {
+ 0177           ;               cstrcpy(buf,"Error");
+ 0177                   .dbline 96
+ 0177 5015              mov A,>L22
+ 0179 08                push A
+ 017A 5015              mov A,<L22
+ 017C 08                push A
+ 017D 52FB              mov A,[X-5]
+ 017F 08                push A
+ 0180 52FC              mov A,[X-4]
+ 0182 08                push A
+ 0183 7C0000            xcall _cstrcpy
+ 0186 38FC              add SP,-4
+ 0188                   .dbline 97
+ 0188           ;       }
+ 0188 8012              xjmp L21
+ 018A           L20:
+ 018A                   .dbline 99
+ 018A           ;       else
+ 018A           ;       {
+ 018A                   .dbline 100
+ 018A           ;               strcpy(buf,fbuf);
+ 018A 5202              mov A,[X+2]
+ 018C 08                push A
+ 018D 5203              mov A,[X+3]
+ 018F 08                push A
+ 0190 52FB              mov A,[X-5]
+ 0192 08                push A
+ 0193 52FC              mov A,[X-4]
+ 0195 08                push A
+ 0196 7C0000            xcall _strcpy
+ 0199 38FC              add SP,-4
+ 019B                   .dbline 101
+ 019B           ;       }
+ 019B           L21:
+ 019B                   .dbline 102
+ 019B           ;       cstrcat(buf,"\r\n");
+ 019B 5012              mov A,>L23
+ 019D 08                push A
+ 019E 5012              mov A,<L23
+ 01A0 08                push A
+ 01A1 52FB              mov A,[X-5]
+ 01A3 08                push A
+ 01A4 52FC              mov A,[X-4]
+ 01A6 08                push A
+ 01A7 7C0000            xcall _cstrcat
+ 01AA 38FC              add SP,-4
+ 01AC                   .dbline -2
+ 01AC           L19:
+ 01AC 38FC              add SP,-4
+ 01AE 20                pop X
+ 01AF                   .dbline 0 ; func end
+ 01AF 7F                ret
+ 01B0                   .dbsym l fbuf 2 pc
+ 01B0                   .dbsym l status 0 I
+ 01B0                   .dbsym l value -7 I
+ 01B0                   .dbsym l buf -5 pc
+ 01B0                   .dbend
+ 01B0                   .dbfunc e main _main fV
+ 01B0           ;            Len -> X+64
+ 01B0           ;          pData -> X+0
+ 01B0           _main::
+ 01B0                   .dbline -1
+ 01B0 10                push X
+ 01B1 4F                mov X,SP
+ 01B2 3841              add SP,65
+ 01B4                   .dbline 107
+ 01B4           ; }
+ 01B4           ; 
+ 01B4           ; 
+ 01B4           ; void main(void)
+ 01B4           ; {
+ 01B4                   .dbline 111
+ 01B4           ;       BYTE Len;
+ 01B4           ;       BYTE pData[64];
+ 01B4           ;               
+ 01B4           ;       M8C_EnableGInt;
+ 01B4 7101                      or  F, 01h
+ 01B6           
+ 01B6                   .dbline 113
+ 01B6           ;       
+ 01B6           ;       SleepTimer_Start();
+ 01B6 10                push X
+ 01B7 7C0000            xcall _SleepTimer_Start
+ 01BA                   .dbline 114
+ 01BA           ;       SleepTimer_SetInterval(SleepTimer_64_HZ); 
+ 01BA 5008              mov A,8
+ 01BC 7C0000            xcall _SleepTimer_SetInterval
+ 01BF                   .dbline 115
+ 01BF           ;       SleepTimer_EnableInt();
+ 01BF 7C0000            xcall _SleepTimer_EnableInt
+ 01C2 20                pop X
+ 01C3 8035              xjmp L26
+ 01C5           L25:
+ 01C5                   .dbline 118
+ 01C5           ; 
+ 01C5           ;     while(1)
+ 01C5           ;     {
+ 01C5                   .dbline 119
+ 01C5           ;               format_temperature(pData,tcn75_read(0));
+ 01C5 5000              mov A,0
+ 01C7 08                push A
+ 01C8 9E7D              xcall _tcn75_read
+ 01CA 5100              mov A,[__r0]
+ 01CC 08                push A
+ 01CD 5100              mov A,[__r1]
+ 01CF 08                push A
+ 01D0 5100              mov A,[__r0]
+ 01D2 08                push A
+ 01D3 10                push X
+ 01D4 9F1D              xcall _format_temperature
+ 01D6 38FB              add SP,-5
+ 01D8                   .dbline 121
+ 01D8           ;       
+ 01D8           ;               LCD_Position(0,0);
+ 01D8 10                push X
+ 01D9 5000              mov A,0
+ 01DB 5700              mov X,0
+ 01DD 7C0000            xcall _LCD_Position
+ 01E0                   .dbline 122
+ 01E0           ;               LCD_PrCString("                 ");
+ 01E0 5000              mov A,>L28
+ 01E2 08                push A
+ 01E3 5000              mov A,<L28
+ 01E5 5C                mov X,A
+ 01E6 18                pop A
+ 01E7 7C0000            xcall _LCD_PrCString
+ 01EA                   .dbline 123
+ 01EA           ;               LCD_Position(0,0);
+ 01EA 5000              mov A,0
+ 01EC 5700              mov X,0
+ 01EE 7C0000            xcall _LCD_Position
+ 01F1 20                pop X
+ 01F2                   .dbline 124
+ 01F2           ;               LCD_PrString(pData);    
+ 01F2 10                push X
+ 01F3 5100              mov A,[__r0]
+ 01F5 7C0000            xcall _LCD_PrString
+ 01F8 20                pop X
+ 01F9                   .dbline 125
+ 01F9           ;     }
+ 01F9           L26:
+ 01F9                   .dbline 117
+ 01F9 8FCB              xjmp L25
+ 01FB           X7:
+ 01FB                   .dbline -2
+ 01FB           L24:
+ 01FB 38BF              add SP,-65
+ 01FD 20                pop X
+ 01FE                   .dbline 0 ; func end
+ 01FE 8FFF              jmp .
+ 0200                   .dbsym l Len 64 c
+ 0200                   .dbsym l pData 0 A[64:64]c
+ 0200                   .dbend
+                        .area bss(ram, con, rel)
+ 0000                   .dbfile C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c
+ 0000           _downcounters::
+ 0000                   .blkb 1
+ 0001                   .dbsym e downcounters _downcounters A[1:1]c
+                        .area lit(rom, con, rel, lit)
+ 0000           L28:
+ 0000 20202020202020202020202020202020  .byte 32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32
+ 0010 2000              .byte 32,0
+ 0012           L23:
+ 0012 0D0A00            .byte 13,10,0
+ 0015           L22:
+ 0015 4572726F7200      .byte 'E,'r,'r,'o,'r,0

@@ -1,0 +1,183 @@
+XH
+H 2 areas 26 global symbols
+M i2chwrsrcinits.asm
+S I2CHW_bStatus Ref0000
+S I2CHW_RsrcStatus Ref0000
+A text size 0 flags 0
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile VMT.inc
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/VMT.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile VME.inc
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/VME.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile TRIGG.inc
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/TRIGG.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile SleepTimer.inc
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/SleepTimer.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile OMT.inc
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/OMT.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile OME.inc
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/OME.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile LCD.inc
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/LCD.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/I2CHWMMS.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/I2CHWMstr.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/I2CHWCommon.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/PSoCGPIOINT.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbfile ./lib/PSoCGPIOINT.inc
+dbfunc 0 ? 0 I
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbfile ./lib/I2CHWCommon.inc
+dbfunc 0 ? 0 I
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbfile memory.inc
+dbfunc 0 ? 0 I
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+dbfunc 0 ? 0 I
+A UserModules size 47 flags 0
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbline 74 0
+dbline 8F 1
+dbline 2 3
+dbline 2 6
+dbline AD 9
+dbline 2 A
+dbline CA D
+dbline E9 E
+dbline EB 11
+dbline 1C 14
+dbline EE 17
+dbline 2 18
+dbline 10E 1A
+dbline 10F 1D
+dbline 2 20
+dbline 111 22
+dbline 1C 25
+dbline 114 28
+dbline 115 29
+dbline 116 2A
+dbline 117 2B
+dbline 118 2C
+dbline 2 2D
+dbline 11B 2F
+dbline 11C 32
+dbline 2 35
+dbline 11E 37
+dbline 121 3A
+dbline 2 3B
+dbline 142 3E
+dbline 1C 3F
+dbline 160 42
+dbline 1C 43
+dbline 17F 46
+S _I2CHW_EnableMstr Def000E
+S I2CHW_DisableMstr Def0043
+S $sb$I2CHW_EnableSlave Def0018
+S $se$I2CHW_EnableSlave Def003B
+S _I2CHW_Start Def0000
+S _I2CHW_ClearInt Def000A
+S I2CHW_EnableInt Def0003
+S $sb$I2CHW_DisableMstr Def0043
+S $se$I2CHW_DisableMstr Def0047
+S I2CHW_ResumeInt Def0001
+S _I2CHW_EnableSlave Def0018
+S I2CHW_Stop Def003B
+S I2CHW_DisableSlave Def003F
+S $sb$I2CHW_ResumeInt Def0001
+S _I2CHW_DisableMstr Def0043
+S $se$I2CHW_ResumeInt Def000A
+S $sb$I2CHW_DisableSlave Def003F
+S $se$I2CHW_DisableSlave Def0043
+S _I2CHW_EnableInt Def0003
+S I2CHW_DisableInt Def003B
+S I2CHW_EnableMstr Def000E
+S _I2CHW_ResumeInt Def0001
+S $sb$I2CHW_DisableInt Def003B
+S $se$I2CHW_DisableInt Def003F
+S _I2CHW_Stop Def003B
+S $sb$I2CHW_EnableMstr Def000E
+S $se$I2CHW_EnableMstr Def0018
+S _I2CHW_DisableSlave Def003F
+S I2CHW_Start Def0000
+S I2CHW_ClearInt Def000A
+S $sb$I2CHW_Start Def0000
+S $se$I2CHW_Start Def0001
+S $sb$I2CHW_ClearInt Def000A
+S $se$I2CHW_ClearInt Def000E
+S _I2CHW_DisableInt Def003B
+S I2CHW_EnableSlave Def0018
+T 00 00 7F 80 04 62 DD FE 43 DE 01 7F 62 DD FE 7F
+R 00 00 00 01
+T 00 0E 26 00 00 7F 26 00 00 7F 43 D6 02 7F 71 10
+R 00 00 00 01 03 03 00 00 03 07 00 01
+T 00 1A 41 04 FC 43 05 03 70 EF 43 07 03 43 D6 01
+R 00 00 00 01
+T 00 28 40 40 40 40 40 71 10 43 04 03 43 05 03 70
+R 00 00 00 01
+T 00 36 EF 43 07 03 7F 41 DE FE 7F 41 D6 FE 7F 41
+R 00 00 00 01
+T 00 44 D6 FD 7F
+R 00 00 00 01

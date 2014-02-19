@@ -1,0 +1,62 @@
+# DO NOT DELETE
+./obj/boot.o : \
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8ssc.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\lib\GLOBAL~1.INC\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./obj/main.o :  ./lib/I2CHWMMS.h ./lib/I2CHWM~1.H ./lib/I2CHWR~1.H\
+   ./lib/LCD.h ./lib/OME.h ./lib/OMT.h ./lib/PSoCAPI.h\
+   ./lib/PSOCGP~1.H ./lib/SLEEPT~1.H ./lib/TRIGG.h ./lib/VME.h\
+   ./lib/VMT.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/limits.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/stdlib.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/string.h
+./lib/obj/i2chwmms.o :  ./lib/I2CHWC~1.INC ./lib/I2CHWMMS.inc\
+   ./lib/I2CHWM~1.INC\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/i2chwmmsint.o :  ./lib/I2CHWC~1.INC ./lib/I2CHWMMS.inc\
+   ./lib/I2CHWM~1.INC\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/i2chwmmsmstr.o :  ./lib/I2CHWC~1.INC ./lib/I2CHWMMS.inc\
+   ./lib/I2CHWM~1.INC\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/i2chwrsrcinits.o :  ./lib/I2CHWC~1.INC ./lib/I2CHWMMS.inc\
+   ./lib/I2CHWM~1.INC ./lib/LCD.inc ./lib/OME.inc ./lib/OMT.inc\
+   ./lib/PSoCAPI.inc ./lib/PSOCGP~1.INC ./lib/SLEEPT~1.INC\
+   ./lib/TRIGG.inc ./lib/VME.inc ./lib/VMT.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/lcd.o :  ./lib/LCD.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/ome.o :  ./lib/OME.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/omt.o :  ./lib/OMT.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/psocconfig.o :  ./lib/GLOBAL~1.INC\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/psocconfigtbl.o : \
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+./lib/obj/sleeptimer.o :  ./lib/SLEEPT~1.INC\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/sleeptimerint.o :  ./lib/SLEEPT~1.INC\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/trigg.o :  ./lib/TRIGG.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/vme.o :  ./lib/VME.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc
+./lib/obj/vmt.o :  ./lib/VMT.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
+   C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\memory.inc

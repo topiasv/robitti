@@ -23,12 +23,12 @@ lib/vmt.asm
 
 Linking..
 
-  ROM 14% full. 2273 out of 16384 bytes used (does not include absolute areas).
+  ROM 17% full. 2665 out of 16384 bytes used (does not include absolute areas).
 
   RAM 7% full. 16 bytes used (does not include stack usage).
 
 Built with ICCM8C STD V7.05.00
 
  
-Gyro - 0 error(s) 0 warning(s) 20:33:30
+Gyro - 0 error(s) 0 warning(s) 18:22:00
 

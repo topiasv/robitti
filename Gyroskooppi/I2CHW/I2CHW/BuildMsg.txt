@@ -1,0 +1,82 @@
+Starting MAKE...
+creating project.mk 
+
+lib/i2chwmms.asm
+
+lib/i2chwmmsint.asm
+
+lib/i2chwmmsmstr.asm
+
+lib/i2chwrsrcinits.asm
+
+lib/lcd.asm
+
+lib/ome.asm
+
+lib/omt.asm
+
+lib/psocconfig.asm
+
+lib/psocconfigtbl.asm
+
+lib/sleeptimer.asm
+
+lib/sleeptimerint.asm
+
+lib/trigg.asm
+
+lib/vme.asm
+
+lib/vmt.asm
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c(65):[warning] [MISRA 2200]calling an undeclared function may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c(65):[warning] [MISRA 2714]calling a function without prototype may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c(66):[warning] [MISRA 2200]calling an undeclared function may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c(66):[warning] [MISRA 2714]calling a function without prototype may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c(71):[warning] [MISRA 2714]calling a function without prototype may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c(72):[warning] [MISRA 2714]calling a function without prototype may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c(76):[warning] [MISRA 2714]calling a function without prototype may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c(77):[warning] [MISRA 2200]calling an undeclared function may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+!W C:\Users\Topias\DOCUME~1\GitHub\robitti\GYROSK~1\I2CHW\I2CHW\main.c(77):[warning] [MISRA 2714]calling a function without prototype may cause unexpected behavior if the function 
+
+takes or returns values other than int
+
+./boot.asm
+
+Linking..
+
+!ERROR {linker} file 'main.o': undefined symbol '_I2CHW_ClrRdStatus'
+
+!ERROR {linker} file 'main.o': undefined symbol '_I2CHW_ClrWrStatus'
+
+!ERROR {linker} file 'main.o': undefined symbol '_I2CHW_bReadI2CStatus'
+
+make: *** [output/I2CHW.rom] Error -1
+
+ 
+I2CHW - 4 error(s) 9 warning(s) 15:08:22
+
