@@ -1,0 +1,595 @@
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000                   .dbfile Z:\psoc\FC9B7124\Testi\Testi\main.c
+ 0000                   .dbfunc e LCD_PrintFloat _LCD_PrintFloat fV
+ 0000           ;         Status -> X+4
+ 0000           ;            buf -> X+2
+ 0000           ;             ii -> X+0
+ 0000           ;              n -> X-9
+ 0000           ;       NewFloat -> X-7
+ 0000           _LCD_PrintFloat::
+ 0000                   .dbline -1
+ 0000 10                push X
+ 0001 4F                mov X,SP
+ 0002 3806              add SP,6
+ 0004                   .dbline 28
+ 0004           ; //----------------------------------------------------------------------------
+ 0004           ; // C main line
+ 0004           ; //----------------------------------------------------------------------------
+ 0004           ; 
+ 0004           ; #include <m8c.h>        // part specific constants and macros
+ 0004           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0004           ; #include "stdlib.h" // LCD Float test
+ 0004           ; #include "string.h" // LCD Float test
+ 0004           ; 
+ 0004           ; float Etaisyys(void);
+ 0004           ; 
+ 0004           ; //Echon määritelmät jotta pinniä voidaan lukea
+ 0004           ; 
+ 0004           ; // Macro to access individual bits in an IOPort
+ 0004           ; #define BITMask(BitNumber) (0x01 << BitNumber)
+ 0004           ; // Macros to access the Sonar - makes changing of the underlying hardware a lot easier
+ 0004           ; #define SonarPort PRT1DR                      // Sonar is connected to Port1
+ 0004           ; #define EchoInputBit 3                                // Input comes from SonarPort Pin 3
+ 0004           ; #define TestEchoInput         (SonarPort & BITMask(EchoInputBit))
+ 0004           ; 
+ 0004           ; //Etäisyysfunktion timervaluen määritys
+ 0004           ; unsigned int timervalue;
+ 0004           ; 
+ 0004           ; 
+ 0004           ; //LCD PrintFloat funktio
+ 0004           ; //Ottaa sisäänsä floatin ja desimaalien määrän (n)
+ 0004           ; void LCD_PrintFloat(float NewFloat,int n)
+ 0004           ; {
+ 0004                   .dbline 30
+ 0004           ; int Status;
+ 0004           ; int ii=00;
+ 0004 560100            mov [X+1],0
+ 0007 560000            mov [X+0],0
+ 000A                   .dbline 33
+ 000A           ; char* buf;
+ 000A           ;       
+ 000A           ;       buf = ftoa(NewFloat, &Status);
+ 000A 5A00              mov [__r1],X
+ 000C 060004            add [__r1],4
+ 000F 5100              mov A,[__r0]
+ 0011 08                push A
+ 0012 5100              mov A,[__r1]
+ 0014 08                push A
+ 0015 52F9              mov A,[X-7]
+ 0017 08                push A
+ 0018 52FA              mov A,[X-6]
+ 001A 08                push A
+ 001B 52FB              mov A,[X-5]
+ 001D 08                push A
+ 001E 52FC              mov A,[X-4]
+ 0020 08                push A
+ 0021 7C0000            xcall _ftoa
+ 0024 38FA              add SP,-6
+ 0026 5100              mov A,[__r1]
+ 0028 5403              mov [X+3],A
+ 002A 5100              mov A,[__r0]
+ 002C 5402              mov [X+2],A
+ 002E 8014              xjmp L3
+ 0030           L2:
+ 0030                   .dbline 35
+ 0030           ;       while (buf[ii])
+ 0030           ;       {
+ 0030                   .dbline 36
+ 0030           ;               if ('.'==buf[ii]) break;
+ 0030 5201              mov A,[X+1]
+ 0032 0303              add A,[X+3]
+ 0034 5300              mov [__r1],A
+ 0036 3E00              mvi A,[__r1]
+ 0038 392E              cmp A,46
+ 003A B003              jnz L5
+ 003C                   .dbline 36
+ 003C 8010              xjmp L4
+ 003E           L5:
+ 003E                   .dbline 37
+ 003E           ;               ii++;
+ 003E 7701              inc [X+1]
+ 0040 0F0000            adc [X+0],0
+ 0043                   .dbline 38
+ 0043           ;       }
+ 0043           L3:
+ 0043                   .dbline 34
+ 0043 5201              mov A,[X+1]
+ 0045 0303              add A,[X+3]
+ 0047 5300              mov [__r1],A
+ 0049 3E00              mvi A,[__r1]
+ 004B BFE4              jnz L2
+ 004D           L4:
+ 004D                   .dbline 39
+ 004D           ;       buf[ii+1+n]='\0';
+ 004D 5201              mov A,[X+1]
+ 004F 0101              add A,1
+ 0051 5300              mov [__r1],A
+ 0053 52F8              mov A,[X-8]
+ 0055 0400              add [__r1],A
+ 0057 5203              mov A,[X+3]
+ 0059 0400              add [__r1],A
+ 005B 5000              mov A,0
+ 005D 3F00              mvi [__r1],A
+ 005F                   .dbline 40
+ 005F           ;       LCD_Position(1,5);
+ 005F 10                push X
+ 0060 5705              mov X,5
+ 0062 5001              mov A,1
+ 0064 7C0000            xcall _LCD_Position
+ 0067 20                pop X
+ 0068                   .dbline 41
+ 0068           ;       LCD_PrString(buf);
+ 0068 10                push X
+ 0069 5202              mov A,[X+2]
+ 006B 08                push A
+ 006C 5203              mov A,[X+3]
+ 006E 5C                mov X,A
+ 006F 18                pop A
+ 0070 7C0000            xcall _LCD_PrString
+ 0073 20                pop X
+ 0074                   .dbline -2
+ 0074           L1:
+ 0074 38FA              add SP,-6
+ 0076 20                pop X
+ 0077                   .dbline 0 ; func end
+ 0077 7F                ret
+ 0078                   .dbsym l Status 4 I
+ 0078                   .dbsym l buf 2 pc
+ 0078                   .dbsym l ii 0 I
+ 0078                   .dbsym l n -9 I
+ 0078                   .dbsym l NewFloat -7 D
+ 0078                   .dbend
+ 0078                   .dbfunc e Etaisyys _Etaisyys fD
+ 0078           ;            buf -> X+6
+ 0078           ;        MyFloat -> X+2
+ 0078           ;              i -> X+0
+ 0078           _Etaisyys::
+ 0078                   .dbline -1
+ 0078 10                push X
+ 0079 4F                mov X,SP
+ 007A 3808              add SP,8
+ 007C                   .dbline 46
+ 007C           ;       
+ 007C           ; }
+ 007C           ; 
+ 007C           ; //Etäisyysfunktio
+ 007C           ; float Etaisyys(void) {
+ 007C                   .dbline 48
+ 007C           ;       int i;
+ 007C           ;       float MyFloat = 1.2345;
+ 007C 56023F            mov [X+2],63
+ 007F 56039E            mov [X+3],-98
+ 0082 560404            mov [X+4],4
+ 0085 560519            mov [X+5],25
+ 0088                   .dbline 54
+ 0088           ;       char* buf;
+ 0088           ;       
+ 0088           ;       // TestEchoInput pitää olla määritelty koodin alussa
+ 0088           ;       
+ 0088           ;       // Trigger pulse
+ 0088           ;       TRIGG_Start();
+ 0088 10                push X
+ 0089 7C0000            xcall _TRIGG_Start
+ 008C                   .dbline 55
+ 008C           ;       TRIGG_Switch(1);
+ 008C 5001              mov A,1
+ 008E 7C0000            xcall _TRIGG_Switch
+ 0091 20                pop X
+ 0092                   .dbline 56
+ 0092           ;         for (i=0;i<4;i++); //n. 10us
+ 0092 560100            mov [X+1],0
+ 0095 560000            mov [X+0],0
+ 0098           L8:
+ 0098                   .dbline 56
+ 0098           L9:
+ 0098                   .dbline 56
+ 0098 7701              inc [X+1]
+ 009A 0F0000            adc [X+0],0
+ 009D                   .dbline 56
+ 009D 5201              mov A,[X+1]
+ 009F 1104              sub A,4
+ 00A1 5200              mov A,[X+0]
+ 00A3 3180              xor A,-128
+ 00A5 1980              sbb A,(0 ^ 0x80)
+ 00A7 CFF0              jc L8
+ 00A9           X0:
+ 00A9                   .dbline 57
+ 00A9           ;       TRIGG_Switch(0);
+ 00A9 10                push X
+ 00AA 5000              mov A,0
+ 00AC 7C0000            xcall _TRIGG_Switch
+ 00AF 20                pop X
+ 00B0                   .dbline 59
+ 00B0           ; 
+ 00B0           ;       timervalue=0;
+ 00B0 550100            mov [_timervalue+1],0
+ 00B3 550000            mov [_timervalue],0
+ 00B6           L12:
+ 00B6                   .dbline 60
+ 00B6           ;       while (!TestEchoInput); // Wait until Echo returns
+ 00B6           L13:
+ 00B6                   .dbline 60
+ 00B6 5D04              mov A,REG[0x4]
+ 00B8 5300              mov [__r0],A
+ 00BA 470008            tst [__r0],8
+ 00BD AFF8              jz L12
+ 00BF 8006              xjmp L16
+ 00C1           L15:
+ 00C1                   .dbline 63
+ 00C1           ;       
+ 00C1           ;       while (TestEchoInput)   // And ends
+ 00C1           ;       {
+ 00C1                   .dbline 64
+ 00C1           ;                timervalue++;          // Laskee kestoa kun echossa high
+ 00C1 7601              inc [_timervalue+1]
+ 00C3 0E0000            adc [_timervalue],0
+ 00C6                   .dbline 65
+ 00C6           ;       };                                              
+ 00C6           L16:
+ 00C6                   .dbline 62
+ 00C6 5D04              mov A,REG[0x4]
+ 00C8 5300              mov [__r0],A
+ 00CA 470008            tst [__r0],8
+ 00CD BFF3              jnz L15
+ 00CF                   .dbline 65
+ 00CF                   .dbline 66
+ 00CF           ;       MyFloat=timervalue/16.6;        //Laskee kestosta etäisyyden sentteinä
+ 00CF 5101              mov A,[_timervalue+1]
+ 00D1 2101              and A,1
+ 00D3 5300              mov [__r3],A
+ 00D5 550000            mov [__r2],0
+ 00D8 470080            tst [__r2],-128
+ 00DB A009              jz X1
+ 00DD 5500FF            mov [__r1],-1
+ 00E0 5500FF            mov [__r0],-1
+ 00E3 8007              jmp X2
+ 00E5           X1:
+ 00E5 550000            mov [__r1],0
+ 00E8 550000            mov [__r0],0
+ 00EB           X2:
+ 00EB 5100              mov A,[__r0]
+ 00ED 08                push A
+ 00EE 5100              mov A,[__r1]
+ 00F0 08                push A
+ 00F1 5100              mov A,[__r2]
+ 00F3 08                push A
+ 00F4 5100              mov A,[__r3]
+ 00F6 08                push A
+ 00F7 7C0000            xcall __long2fp
+ 00FA 18                pop A
+ 00FB 5300              mov [__r3],A
+ 00FD 18                pop A
+ 00FE 5300              mov [__r2],A
+ 0100 18                pop A
+ 0101 5300              mov [__r1],A
+ 0103 18                pop A
+ 0104 5300              mov [__r0],A
+ 0106 5F0001            mov [__r5],[_timervalue+1]
+ 0109 5F0000            mov [__r4],[_timervalue]
+ 010C 70FB              and F,-5
+ 010E 6E00              rrc [__r4]
+ 0110 6E00              rrc [__r5]
+ 0112 5F0000            mov [__r7],[__r5]
+ 0115 5F0000            mov [__r6],[__r4]
+ 0118 470080            tst [__r6],-128
+ 011B A009              jz X3
+ 011D 5500FF            mov [__r5],-1
+ 0120 5500FF            mov [__r4],-1
+ 0123 8007              jmp X4
+ 0125           X3:
+ 0125 550000            mov [__r5],0
+ 0128 550000            mov [__r4],0
+ 012B           X4:
+ 012B 5100              mov A,[__r4]
+ 012D 08                push A
+ 012E 5100              mov A,[__r5]
+ 0130 08                push A
+ 0131 5100              mov A,[__r6]
+ 0133 08                push A
+ 0134 5100              mov A,[__r7]
+ 0136 08                push A
+ 0137 7C0000            xcall __long2fp
+ 013A 18                pop A
+ 013B 5300              mov [__r7],A
+ 013D 18                pop A
+ 013E 5300              mov [__r6],A
+ 0140 18                pop A
+ 0141 5300              mov [__r5],A
+ 0143 18                pop A
+ 0144 08                push A
+ 0145 5100              mov A,[__r5]
+ 0147 08                push A
+ 0148 5100              mov A,[__r6]
+ 014A 08                push A
+ 014B 5100              mov A,[__r7]
+ 014D 08                push A
+ 014E 5040              mov A,64
+ 0150 08                push A
+ 0151 5000              mov A,0
+ 0153 08                push A
+ 0154 08                push A
+ 0155 08                push A
+ 0156 7C0000            xcall __fpmul
+ 0159 18                pop A
+ 015A 5300              mov [__r7],A
+ 015C 18                pop A
+ 015D 5300              mov [__r6],A
+ 015F 18                pop A
+ 0160 5300              mov [__r5],A
+ 0162 18                pop A
+ 0163 5300              mov [__r4],A
+ 0165 38FC              add SP,-4
+ 0167 5100              mov A,[__r0]
+ 0169 08                push A
+ 016A 5100              mov A,[__r1]
+ 016C 08                push A
+ 016D 5100              mov A,[__r2]
+ 016F 08                push A
+ 0170 5100              mov A,[__r3]
+ 0172 08                push A
+ 0173 5100              mov A,[__r4]
+ 0175 08                push A
+ 0176 5100              mov A,[__r5]
+ 0178 08                push A
+ 0179 5100              mov A,[__r6]
+ 017B 08                push A
+ 017C 5100              mov A,[__r7]
+ 017E 08                push A
+ 017F 7C0000            xcall __fpadd
+ 0182 18                pop A
+ 0183 5300              mov [__r3],A
+ 0185 18                pop A
+ 0186 5300              mov [__r2],A
+ 0188 18                pop A
+ 0189 5300              mov [__r1],A
+ 018B 18                pop A
+ 018C 5300              mov [__r0],A
+ 018E 38FC              add SP,-4
+ 0190 5041              mov A,65
+ 0192 08                push A
+ 0193 5084              mov A,-124
+ 0195 08                push A
+ 0196 50CC              mov A,-52
+ 0198 08                push A
+ 0199 50CD              mov A,-51
+ 019B 08                push A
+ 019C 5100              mov A,[__r0]
+ 019E 08                push A
+ 019F 5100              mov A,[__r1]
+ 01A1 08                push A
+ 01A2 5100              mov A,[__r2]
+ 01A4 08                push A
+ 01A5 5100              mov A,[__r3]
+ 01A7 08                push A
+ 01A8 7C0000            xcall __fpdiv
+ 01AB 18                pop A
+ 01AC 5405              mov [X+5],A
+ 01AE 18                pop A
+ 01AF 5404              mov [X+4],A
+ 01B1 18                pop A
+ 01B2 5403              mov [X+3],A
+ 01B4 18                pop A
+ 01B5 5402              mov [X+2],A
+ 01B7 38FC              add SP,-4
+ 01B9                   .dbline 68
+ 01B9           ;       
+ 01B9           ;       for (i=0;i<30000;i++);          //Looppi joka pitää huolen että sitä ei kutsuta uudestaan liian aikaisin
+ 01B9 560100            mov [X+1],0
+ 01BC 560000            mov [X+0],0
+ 01BF           L18:
+ 01BF                   .dbline 68
+ 01BF           L19:
+ 01BF                   .dbline 68
+ 01BF 7701              inc [X+1]
+ 01C1 0F0000            adc [X+0],0
+ 01C4                   .dbline 68
+ 01C4 5201              mov A,[X+1]
+ 01C6 1130              sub A,48
+ 01C8 5200              mov A,[X+0]
+ 01CA 3180              xor A,-128
+ 01CC 19F5              sbb A,(117 ^ 0x80)
+ 01CE CFF0              jc L18
+ 01D0           X5:
+ 01D0                   .dbline 69
+ 01D0           ;       return MyFloat;
+ 01D0 5202              mov A,[X+2]
+ 01D2 5300              mov [__r0],A
+ 01D4 5203              mov A,[X+3]
+ 01D6 5300              mov [__r1],A
+ 01D8 5204              mov A,[X+4]
+ 01DA 5300              mov [__r2],A
+ 01DC 5205              mov A,[X+5]
+ 01DE 5300              mov [__r3],A
+ 01E0                   .dbline -2
+ 01E0           L7:
+ 01E0 38F8              add SP,-8
+ 01E2 20                pop X
+ 01E3                   .dbline 0 ; func end
+ 01E3 7F                ret
+ 01E4                   .dbsym l buf 6 pc
+ 01E4                   .dbsym l MyFloat 2 D
+ 01E4                   .dbsym l i 0 I
+ 01E4                   .dbend
+                        .area lit(rom, con, rel, lit)
+ 0000           L23:
+ 0000 524F424954544920312E3000  .byte 'R,'O,'B,'I,'T,'T,'I,32,49,46,48,0
+                        .area text(rom, con, rel)
+ 01E4                   .dbfile Z:\psoc\FC9B7124\Testi\Testi\main.c
+ 01E4                   .dbfunc e main _main fV
+ 01E4           ;        MyFloat -> X+16
+ 01E4           ;        theStr1 -> X+4
+ 01E4           ;           Test -> X+0
+ 01E4           _main::
+ 01E4                   .dbline -1
+ 01E4 10                push X
+ 01E5 4F                mov X,SP
+ 01E6 3814              add SP,20
+ 01E8                   .dbline 73
+ 01E8           ; }
+ 01E8           ;       
+ 01E8           ; void main(void)
+ 01E8           ; {
+ 01E8                   .dbline 74
+ 01E8           ;       float MyFloat = 1.2345;
+ 01E8 56103F            mov [X+16],63
+ 01EB 56119E            mov [X+17],-98
+ 01EE 561204            mov [X+18],4
+ 01F1 561319            mov [X+19],25
+ 01F4                   .dbline 75
+ 01F4           ;       float Test = 0;
+ 01F4 560000            mov [X+0],0
+ 01F7 560100            mov [X+1],0
+ 01FA 560200            mov [X+2],0
+ 01FD 560300            mov [X+3],0
+ 0200                   .dbline 76
+ 0200           ;       char theStr1[] = "ROBITTI 1.0";
+ 0200 550000            mov [__r1],<L23
+ 0203 550000            mov [__r0],>L23
+ 0206 5A00              mov [__r3],X
+ 0208 060004            add [__r3],4
+ 020B 10                push X
+ 020C 550000            mov [__rX],0
+ 020F 5100              mov A,[__r0]
+ 0211 5800              mov X,[__r1]
+ 0213           X7:
+ 0213 08                push A
+ 0214 28                romx
+ 0215 3F00              mvi [__r3],A
+ 0217 18                pop A
+ 0218 75                inc X
+ 0219 0900              adc A,0
+ 021B 7600              inc [__rX]
+ 021D 3C000C            cmp [__rX],12
+ 0220 BFF2              jnz X7
+ 0222                   .dbline 77
+ 0222           ;    LCD_Start();                  // LCD käynttöönotto
+ 0222 7C0000            xcall _LCD_Start
+ 0225                   .dbline 78
+ 0225           ;    LCD_Position(0,3);            // Place LCD cursor at row 0, col 5.
+ 0225 5703              mov X,3
+ 0227 5000              mov A,0
+ 0229 7C0000            xcall _LCD_Position
+ 022C 20                pop X
+ 022D                   .dbline 79
+ 022D           ;    LCD_PrString(theStr1);        //Tulosta teksti 1
+ 022D 5A00              mov [__r1],X
+ 022F 060004            add [__r1],4
+ 0232 10                push X
+ 0233 5100              mov A,[__r0]
+ 0235 08                push A
+ 0236 5100              mov A,[__r1]
+ 0238 5C                mov X,A
+ 0239 18                pop A
+ 023A 7C0000            xcall _LCD_PrString
+ 023D 20                pop X
+ 023E                   .dbline 83
+ 023E           ; 
+ 023E           ;       //Luetaan Etäisyysfunktiosta arvo ja pistetään Testiin
+ 023E           ;       //Pelkkää testiä voi käyttää auton ohjaamiseen ilman printfloatteja
+ 023E           ;       Test = Etaisyys();
+ 023E 9E38              xcall _Etaisyys
+ 0240 5100              mov A,[__r0]
+ 0242 5400              mov [X+0],A
+ 0244 5100              mov A,[__r1]
+ 0246 5401              mov [X+1],A
+ 0248 5100              mov A,[__r2]
+ 024A 5402              mov [X+2],A
+ 024C 5100              mov A,[__r3]
+ 024E 5403              mov [X+3],A
+ 0250                   .dbline 84
+ 0250           ;       LCD_Position(1,5);
+ 0250 10                push X
+ 0251 5705              mov X,5
+ 0253 5001              mov A,1
+ 0255 7C0000            xcall _LCD_Position
+ 0258 20                pop X
+ 0259                   .dbline 87
+ 0259           ;       
+ 0259           ;       //Jos arvo on alle 100, printataan arvo ulos
+ 0259           ;       if (Test < 100) {
+ 0259 5042              mov A,66
+ 025B 08                push A
+ 025C 50C8              mov A,-56
+ 025E 08                push A
+ 025F 5000              mov A,0
+ 0261 08                push A
+ 0262 08                push A
+ 0263 5200              mov A,[X+0]
+ 0265 08                push A
+ 0266 5201              mov A,[X+1]
+ 0268 08                push A
+ 0269 5202              mov A,[X+2]
+ 026B 08                push A
+ 026C 5203              mov A,[X+3]
+ 026E 08                push A
+ 026F 7C0000            xcall __fpcmp
+ 0272 38F8              add SP,-8
+ 0274 3900              cmp A,0
+ 0276 A01D              jz L24
+ 0278 3901              cmp A,1
+ 027A A019              jz L24
+ 027C                   .dbline 89
+ 027C           ;       
+ 027C           ;       LCD_PrintFloat(Test, 1);
+ 027C                   .dbline 89
+ 027C 5000              mov A,0
+ 027E 08                push A
+ 027F 5001              mov A,1
+ 0281 08                push A
+ 0282 5200              mov A,[X+0]
+ 0284 08                push A
+ 0285 5201              mov A,[X+1]
+ 0287 08                push A
+ 0288 5202              mov A,[X+2]
+ 028A 08                push A
+ 028B 5203              mov A,[X+3]
+ 028D 08                push A
+ 028E 9D70              xcall _LCD_PrintFloat
+ 0290 38FA              add SP,-6
+ 0292                   .dbline 91
+ 0292           ;               
+ 0292           ;       }
+ 0292 8011              xjmp L27
+ 0294           L24:
+ 0294                   .dbline 95
+ 0294           ;       
+ 0294           ;       //Jos arvo on yli 100, printataan ulos 0
+ 0294           ;       else 
+ 0294           ;               LCD_PrintFloat(0, 1);
+ 0294 5000              mov A,0
+ 0296 08                push A
+ 0297 5001              mov A,1
+ 0299 08                push A
+ 029A 5000              mov A,0
+ 029C 08                push A
+ 029D 08                push A
+ 029E 08                push A
+ 029F 08                push A
+ 02A0 9D5E              xcall _LCD_PrintFloat
+ 02A2 38FA              add SP,-6
+ 02A4           L26:
+ 02A4                   .dbline 98
+ 02A4           ;       
+ 02A4           ;       //ÄLÄ POISTA!!!
+ 02A4           ;       while (1);              //ESTÄÄ MAIN:ISTA POISTUMISEN TÄRKEÄ!!! ÄLÄ POISTA!!!
+ 02A4           L27:
+ 02A4                   .dbline 98
+ 02A4 8FFF              xjmp L26
+ 02A6           X6:
+ 02A6                   .dbline -2
+ 02A6           L22:
+ 02A6 38EC              add SP,-20
+ 02A8 20                pop X
+ 02A9                   .dbline 0 ; func end
+ 02A9 8FFF              jmp .
+ 02AB                   .dbsym l MyFloat 16 D
+ 02AB                   .dbsym l theStr1 4 A[12:12]c
+ 02AB                   .dbsym l Test 0 D
+ 02AB                   .dbend
+                        .area bss(ram, con, rel)
+ 0000                   .dbfile Z:\psoc\FC9B7124\Testi\Testi\main.c
+ 0000           _timervalue::
+ 0000                   .blkb 2
+ 0002                   .dbsym e timervalue _timervalue i

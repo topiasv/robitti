@@ -1,0 +1,38 @@
+Starting MAKE...
+creating project.mk 
+
+lib/echo.asm
+
+lib/echoint.asm
+
+lib/gyro.asm
+
+lib/lcd.asm
+
+lib/ome.asm
+
+lib/omt.asm
+
+lib/psocconfig.asm
+
+lib/psocconfigtbl.asm
+
+lib/trigg.asm
+
+lib/vme.asm
+
+lib/vmt.asm
+
+./boot.asm
+
+Linking..
+
+  ROM 28% full. 4569 out of 16384 bytes used (does not include absolute areas).
+
+  RAM 15% full. 36 bytes used (does not include stack usage).
+
+Built with ICCM8C STD V7.05.00
+
+ 
+Testi - 0 error(s) 0 warning(s) 15:23:02
+
